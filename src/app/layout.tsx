@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Inter } from "next/font/google";
 import { SmoothScroll } from "@/components/motion";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/nav/SiteHeader";
 import { siteMeta } from "@/content";
@@ -48,7 +49,9 @@ export default function RootLayout({
       <body className="antialiased">
         <SmoothScroll />
         <SiteHeader />
-        <main id="main">{children}</main>
+        <main id="main">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <SiteFooter />
       </body>
     </html>

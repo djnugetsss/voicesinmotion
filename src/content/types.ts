@@ -134,6 +134,8 @@ export type Coach = {
   /** Events this coach competes in or coaches, as one display string. */
   events: string;
   achievements: string[];
+  /** Shown when the card is expanded on /about. */
+  bio: string;
   /**
    * Portrait, rendered in a 4:5 box. Leave `null` for the gradient
    * placeholder — drop in `{ src, alt }` and the image takes over with no
@@ -169,4 +171,65 @@ export type FooterContent = {
   email: { address: string; placeholder: boolean } | null;
   contactNote: string;
   copyright: string;
+};
+
+/**
+ * A picture or clip slot. `src` stays `null` until a real file exists — the
+ * UI renders a palette gradient in the reserved box instead, so every layout
+ * is testable before any asset lands.
+ *
+ * `aspect` is width ÷ height: 1 square, 0.8 = 4:5 portrait, 1.5 = 3:2
+ * landscape, 0.5625 = 9:16. It reserves the box, so nothing shifts on load.
+ */
+export type MediaAsset = {
+  src: string | null;
+  alt: string;
+  aspect: number;
+};
+
+export type StoryBlock = {
+  id: string;
+  heading: string;
+  body: string[];
+  image: MediaAsset;
+};
+
+export type PillarIcon = "podium" | "scales" | "waveform";
+
+export type Pillar = {
+  id: string;
+  icon: PillarIcon;
+  title: string;
+  body: string;
+};
+
+export type AboutContent = {
+  hero: { eyebrow: string; headline: string; subhead: string };
+  story: { eyebrow: string; title: string; blocks: StoryBlock[] };
+  mission: { eyebrow: string; title: string; pillars: Pillar[] };
+  roster: { eyebrow: string; title: string; intro: string };
+};
+
+export type MediaCategory = "workshops" | "competitions" | "team";
+
+export type MediaItem = {
+  id: string;
+  type: "image" | "video";
+  src: string | null;
+  alt: string;
+  caption: string;
+  /** Width ÷ height. Reserves the box so the masonry never shifts. */
+  aspect: number;
+  category: MediaCategory;
+  placeholder: boolean;
+};
+
+export type MediaFilter = { id: "all" | MediaCategory; label: string };
+
+export type MediaContent = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  filters: MediaFilter[];
+  items: MediaItem[];
 };

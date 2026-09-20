@@ -31,7 +31,7 @@ export function CoachesSection() {
       </RevealBlock>
 
       <ul className="mt-12 grid gap-5 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4">
-        {coaches.coaches.map((coach, i) => (
+        {coaches.coaches.slice(0, 4).map((coach, i) => (
           <RevealBlock
             key={coach.id}
             as="li"
