@@ -1,26 +1,154 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------
+   The Stage — design tokens
+   ------------------------------------------------------------------ */
+
+@theme {
+  --color-paper: #fbfcfe;
+  --color-mist: #edf2fa;
+  --color-sky: #a8c0e0;
+  --color-azure: #5c87c4;
+  --color-ink: #101b2e;
+  --color-gold: #d9a441;
+
+  --font-display: var(--font-display-serif), ui-serif, Georgia, serif;
+  --font-sans: var(--font-body-sans), ui-sans-serif, system-ui, sans-serif;
+
+  /* Fluid type scale. Mobile-first: the low end is the 375px value. */
+  --text-eyebrow: clamp(0.6875rem, 0.64rem + 0.2vw, 0.8125rem);
+  --text-display: clamp(2.875rem, 1.55rem + 5.65vw, 7rem);
+  --text-lead: clamp(1.0625rem, 0.98rem + 0.36vw, 1.3125rem);
+
+  --ease-stage: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Raw aliases, for hand-written CSS and inline SVG. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: var(--color-paper);
+  --mist: var(--color-mist);
+  --sky: var(--color-sky);
+  --azure: var(--color-azure);
+  --ink: var(--color-ink);
+  --gold: var(--color-gold);
+
+  --header-h: 4.25rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@media (min-width: 1024px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --header-h: 5.25rem;
   }
 }
 
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto; /* Lenis owns smooth scrolling */
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  /* Layered wash rather than a flat fill. */
+  background-image:
+    radial-gradient(120% 70% at 50% -10%, color-mix(in oklab, var(--sky) 42%, transparent) 0%, transparent 62%),
+    linear-gradient(180deg, var(--paper) 0%, var(--mist) 55%, var(--paper) 100%);
+  background-attachment: fixed;
+}
+
+/* Anchor targets clear the fixed header. */
+[id] {
+  scroll-margin-top: calc(var(--header-h) + 1.5rem);
+}
+
+::selection {
+  background: color-mix(in oklab, var(--azure) 22%, transparent);
+  color: var(--ink);
+}
+
+/* ------------------------------------------------------------------
+   Focus — visible on everything interactive
+   ------------------------------------------------------------------ */
+
+:focus-visible {
+  outline: 2px solid var(--azure);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--azure);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------------------------
+   Utilities
+   ------------------------------------------------------------------ */
+
+@utility font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 0.96;
+}
+
+@utility text-balance-tight {
+  text-wrap: balance;
+}
+
+.hairline {
+  border-bottom: 1px solid color-mix(in oklab, var(--ink) 9%, transparent);
+}
+
+.sr-only-focusable:not(:focus):not(:focus-within) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------
+   Ambient gradient drift — transform + opacity only
+   ------------------------------------------------------------------ */
+
+@keyframes drift-a {
+  0%   { transform: translate3d(-6%, -4%, 0) scale(1.05); opacity: 0.85; }
+  50%  { transform: translate3d(6%, 5%, 0) scale(1.22);   opacity: 1; }
+  100% { transform: translate3d(-6%, -4%, 0) scale(1.05); opacity: 0.85; }
+}
+
+@keyframes drift-b {
+  0%   { transform: translate3d(5%, 6%, 0) scale(1.18);   opacity: 0.7; }
+  50%  { transform: translate3d(-7%, -3%, 0) scale(1);    opacity: 0.95; }
+  100% { transform: translate3d(5%, 6%, 0) scale(1.18);   opacity: 0.7; }
+}
+
+.drift-a { animation: drift-a 46s var(--ease-stage) infinite; }
+.drift-b { animation: drift-b 62s var(--ease-stage) infinite; }
+
+/* ------------------------------------------------------------------
+   Reduced motion — global backstop. Each primitive also guards in JS.
+   ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
