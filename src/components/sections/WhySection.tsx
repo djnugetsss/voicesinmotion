@@ -9,6 +9,7 @@ import {
   usePrefersReducedMotion,
   useScrubbedStyle,
 } from "@/components/motion";
+import { Section, SectionEyebrow } from "@/components/layout/Section";
 import { CountUp } from "@/components/ui/CountUp";
 import { why } from "@/content";
 
@@ -73,46 +74,21 @@ export function WhySection() {
     offset: ["start start", "end end"],
   });
 
-  // No `overflow-hidden` on the section: it would become the sticky
-  // descendant's scroll container and the pin would silently stop working.
-  // The drift blob is clipped by the background layer instead.
   return (
-    <section id={why.id} aria-labelledby="why-heading" className="relative isolate">
-      {/* Paper into mist. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-      >
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(180deg, var(--paper) 0%, var(--mist) 42%, var(--mist) 78%, color-mix(in oklab, var(--mist) 60%, var(--paper)) 100%)",
-          }}
-        />
-        <div
-          className="drift-b absolute top-[12%] -left-[18%] h-[70vh] w-[70vw] rounded-full blur-[90px]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--sky) 40%, transparent) 0%, transparent 70%)",
-          }}
-        />
-      </div>
-
+    <Section
+      id={why.id}
+      tone="mist"
+      size="flush"
+      contained={false}
+      labelledBy="why-heading"
+    >
       {/* ---- The pinned moment ---- */}
       <div ref={pinRef} className="relative motion-safe:lg:h-[300vh]">
         <div className="motion-safe:lg:sticky motion-safe:lg:top-0 motion-safe:lg:flex motion-safe:lg:h-screen motion-safe:lg:items-center">
           <div className="shell py-24 sm:py-28 motion-safe:lg:py-0">
-            <h2
-              id="why-heading"
-              className="flex items-center gap-2.5 text-[length:var(--text-eyebrow)] font-medium tracking-[0.2em] text-ink/55 uppercase"
-            >
-              <span
-                aria-hidden="true"
-                className="inline-block h-px w-6 shrink-0 bg-ink/25"
-              />
+            <SectionEyebrow as="h2" id="why-heading">
               {why.eyebrow}
-            </h2>
+            </SectionEyebrow>
 
             <figure className="mt-8 sm:mt-10">
               <blockquote>
@@ -140,7 +116,7 @@ export function WhySection() {
       </div>
 
       {/* ---- Supporting copy ---- */}
-      <div className="shell pb-20 sm:pb-24 motion-safe:lg:pt-10">
+      <div className="shell pb-24 sm:pb-28 lg:pb-36 motion-safe:lg:pt-10">
         <div className="grid gap-x-16 gap-y-6 lg:grid-cols-2">
           {why.body.map((paragraph, i) => (
             <RevealBlock
@@ -180,6 +156,6 @@ export function WhySection() {
           ))}
         </ul>
       </div>
-    </section>
+    </Section>
   );
 }

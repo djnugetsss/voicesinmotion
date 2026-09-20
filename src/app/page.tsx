@@ -1,5 +1,8 @@
+import { ClosingSection } from "@/components/sections/ClosingSection";
+import { CoachesSection } from "@/components/sections/CoachesSection";
 import { Hero } from "@/components/sections/Hero";
 import { ProgramsSection } from "@/components/sections/ProgramsSection";
+import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { SummerSection } from "@/components/sections/SummerSection";
 import { WhySection } from "@/components/sections/WhySection";
 
@@ -10,6 +13,9 @@ export default function HomePage() {
       <WhySection />
       <ProgramsSection />
       <SummerSection />
+      <ReviewsSection />
+      <CoachesSection />
+      <ClosingSection />
     </>
   );
 }

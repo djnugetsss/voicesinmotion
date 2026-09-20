@@ -2,7 +2,14 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-export type ActionVariant = "primary" | "secondary" | "gold";
+export type ActionVariant =
+  | "primary"
+  | "secondary"
+  | "gold"
+  /** Filled gold — the one loud button, for the closing band. */
+  | "gold-solid"
+  /** Outlined light, for use on the deep band. */
+  | "outline-light";
 export type ActionSize = "sm" | "md" | "lg";
 
 const base =
@@ -22,6 +29,15 @@ const variants: Record<ActionVariant, string> = {
   gold:
     "border border-gold/60 text-ink/90 " +
     "hover:border-gold hover:bg-gold/10 hover:text-ink",
+  "gold-solid":
+    "bg-gold text-ink shadow-[0_14px_36px_-14px_rgba(217,164,65,0.75)] " +
+    "hover:bg-[color-mix(in_oklab,var(--gold)_86%,white)] " +
+    "hover:shadow-[0_22px_46px_-16px_rgba(217,164,65,0.85)] " +
+    "focus-visible:outline-gold",
+  "outline-light":
+    "border border-paper/35 text-paper " +
+    "hover:border-paper/70 hover:bg-paper/10 " +
+    "focus-visible:outline-paper",
 };
 
 const sizes: Record<ActionSize, string> = {

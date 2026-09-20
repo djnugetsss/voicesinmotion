@@ -171,6 +171,26 @@ body {
 .drift-b { animation: drift-b 62s var(--ease-stage) infinite; }
 
 /* ------------------------------------------------------------------
+   Marquee — one linear translate, paused on hover or keyboard focus.
+   The track holds the card list twice, so -50% lands back on a seam.
+   ------------------------------------------------------------------ */
+
+@keyframes marquee-x {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+.marquee-track {
+  animation: marquee-x var(--marquee-duration, 70s) linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ------------------------------------------------------------------
    Reduced motion — global backstop. Each primitive also guards in JS.
    ------------------------------------------------------------------ */
 

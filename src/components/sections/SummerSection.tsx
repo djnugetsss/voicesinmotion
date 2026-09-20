@@ -8,6 +8,7 @@ import {
   useMinWidth,
   usePrefersReducedMotion,
 } from "@/components/motion";
+import { Section, SectionEyebrow } from "@/components/layout/Section";
 import { SessionCard } from "@/components/ui/SessionCard";
 import { Waveform } from "@/components/ui/Waveform";
 import { summer } from "@/content";
@@ -118,21 +119,13 @@ export function SummerSection() {
   };
 
   return (
-    <section
+    <Section
       id={summer.id}
-      aria-labelledby="summer-heading"
-      className="relative isolate"
+      tone="sky"
+      size="flush"
+      contained={false}
+      labelledBy="summer-heading"
     >
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(180deg, var(--paper) 0%, var(--mist) 35%, color-mix(in oklab, var(--sky) 22%, var(--mist)) 100%)",
-          }}
-        />
-      </div>
-
       <div ref={sectionRef} style={pinned && metrics.height ? { height: metrics.height } : undefined}>
         <div
           ref={viewportRef}
@@ -140,13 +133,7 @@ export function SummerSection() {
         >
           <div className="shell">
             <RevealBlock>
-              <p className="flex items-center gap-2.5 text-[length:var(--text-eyebrow)] font-medium tracking-[0.2em] text-ink/55 uppercase">
-                <span
-                  aria-hidden="true"
-                  className="inline-block h-px w-6 shrink-0 bg-ink/25"
-                />
-                {summer.eyebrow}
-              </p>
+              <SectionEyebrow>{summer.eyebrow}</SectionEyebrow>
             </RevealBlock>
 
             <RevealWords
@@ -204,6 +191,6 @@ export function SummerSection() {
           </motion.div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

@@ -50,7 +50,13 @@ export type WaveformProps = {
    */
   envelope?: "arc" | "rise";
   strokeWidth?: number;
-  /** Which strand gets the gold treatment. `-1` for none. */
+  /** Stroke for the ordinary strands. Any CSS colour. */
+  stroke?: string;
+  /** Stroke for the accent strand. */
+  accentStroke?: string;
+  /** Opacity of the first strand; later strands step down from here. */
+  baseOpacity?: number;
+  /** Which strand gets the accent treatment. `-1` for none. */
   accentIndex?: number;
   className?: string;
 };
@@ -86,6 +92,9 @@ export function Waveform({
   bulgeWidth = 0.1,
   envelope = "arc",
   strokeWidth = 1.5,
+  stroke = "var(--azure)",
+  accentStroke = "var(--gold)",
+  baseOpacity = 0.4,
   accentIndex = 1,
   className,
 }: WaveformProps) {
@@ -258,11 +267,14 @@ export function Waveform({
               pathsRef.current[i] = el;
             }}
             fill="none"
-            stroke={isAccent ? "var(--gold)" : "var(--azure)"}
+            stroke={isAccent ? accentStroke : stroke}
             strokeWidth={strokeWidth * (isAccent ? 1.1 : 1 - i * 0.12)}
             strokeLinecap="round"
             vectorEffect="non-scaling-stroke"
-            opacity={isAccent ? 0.55 : 0.4 - i * 0.07}
+            opacity={Math.max(
+              0.06,
+              isAccent ? baseOpacity + 0.15 : baseOpacity - i * 0.07,
+            )}
           />
         );
       })}

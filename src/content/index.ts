@@ -4,3 +4,7 @@ export * from "./hero";
 export * from "./why";
 export * from "./programs";
 export * from "./summer";
+export * from "./reviews";
+export * from "./coaches";
+export * from "./closing";
+export * from "./footer";

@@ -4,6 +4,7 @@ import { useScroll } from "motion/react";
 import { useRef } from "react";
 import { ScrollCue } from "./ScrollCue";
 import { Parallax, RevealBlock, RevealWords, Spotlight } from "@/components/motion";
+import { Section } from "@/components/layout/Section";
 import { ActionLink } from "@/components/ui/ActionLink";
 import { Waveform } from "@/components/ui/Waveform";
 import { hero } from "@/content";
@@ -18,44 +19,15 @@ export function Hero() {
   });
 
   return (
-    <section
+    <Section
+      as="section"
+      tone="hero"
+      size="flush"
+      contained={false}
+      labelledBy="hero-heading"
       ref={ref}
-      aria-labelledby="hero-heading"
-      className="relative isolate flex min-h-[100svh] flex-col justify-center overflow-hidden pt-[var(--header-h)] pb-24 sm:pb-28"
+      className="flex min-h-[100svh] flex-col justify-center overflow-hidden pt-[var(--header-h)] pb-24 sm:pb-28"
     >
-      {/* ---- Ambient light: drifting gradient layers, transform + opacity ---- */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(175deg, var(--paper) 0%, var(--mist) 46%, color-mix(in oklab, var(--sky) 34%, var(--paper)) 100%)",
-          }}
-        />
-        <div
-          className="drift-a absolute -top-[28%] left-[-15%] h-[85vh] w-[85vw] rounded-full blur-[70px]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--sky) 62%, transparent) 0%, transparent 68%)",
-          }}
-        />
-        <div
-          className="drift-b absolute -right-[20%] bottom-[-25%] h-[80vh] w-[80vw] rounded-full blur-[80px]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--azure) 30%, transparent) 0%, transparent 66%)",
-          }}
-        />
-        {/* Stage floor: a soft lift of light along the bottom edge. */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-[42vh]"
-          style={{
-            backgroundImage:
-              "linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--paper) 78%, transparent) 70%, var(--paper) 100%)",
-          }}
-        />
-      </div>
-
       <Spotlight size={700} intensity={0.6} />
 
       {/* ---- The voice ----
@@ -141,6 +113,6 @@ export function Hero() {
           <ScrollCue label={hero.scrollCue} progress={scrollYProgress} />
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

@@ -110,3 +110,63 @@ export type SummerContent = {
   price: PriceBadge;
   sessions: Session[];
 };
+
+export type Review = {
+  id: string;
+  quote: string;
+  name: string;
+  role: string;
+  session: string;
+};
+
+export type ReviewsContent = {
+  id: string;
+  eyebrow: string;
+  title: string;
+  intro: string;
+  reviews: Review[];
+};
+
+export type Coach = {
+  id: string;
+  name: string;
+  role: string;
+  /** Events this coach competes in or coaches, as one display string. */
+  events: string;
+  achievements: string[];
+  /**
+   * Portrait, rendered in a 4:5 box. Leave `null` for the gradient
+   * placeholder — drop in `{ src, alt }` and the image takes over with no
+   * other change.
+   */
+  photo: { src: string; alt: string } | null;
+  /** True while the person and their record are invented scaffolding. */
+  placeholder: boolean;
+};
+
+export type CoachesContent = {
+  id: string;
+  eyebrow: string;
+  title: string;
+  intro: string;
+  coaches: Coach[];
+};
+
+export type ClosingContent = {
+  id: string;
+  headline: string;
+  subhead: string;
+  primaryCta: Cta;
+  secondaryCta: Cta;
+};
+
+export type FooterContent = {
+  blurb: string;
+  linksTitle: string;
+  links: NavLink[];
+  contactTitle: string;
+  /** Replace or remove before launch — see the note in `footer.ts`. */
+  email: { address: string; placeholder: boolean } | null;
+  contactNote: string;
+  copyright: string;
+};
