@@ -46,6 +46,15 @@ export function usePointerFine(): boolean {
   return useMediaQuery("(pointer: fine)", false);
 }
 
+/**
+ * True at or above `px`. Used to decide whether a section can afford its
+ * pinned, scroll-scrubbed layout. Server-renders as `false`, so the stacked
+ * layout is always the one that ships in the HTML.
+ */
+export function useMinWidth(px: number): boolean {
+  return useMediaQuery(`(min-width: ${px}px)`, false);
+}
+
 /** Convenience: animation is allowed only when motion is not reduced. */
 export function useMotionAllowed(): boolean {
   return !usePrefersReducedMotion();

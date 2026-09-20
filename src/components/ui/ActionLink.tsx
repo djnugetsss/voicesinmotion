@@ -8,7 +8,7 @@ export type ActionSize = "sm" | "md" | "lg";
 const base =
   "group relative inline-flex items-center justify-center gap-2 rounded-full " +
   "font-medium tracking-[-0.01em] whitespace-nowrap " +
-  "transition-[transform,box-shadow,background-color,border-color,color] duration-300 ease-out " +
+  "transition-[translate,box-shadow,background-color,border-color,color] duration-300 ease-out " +
   "focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-azure " +
   "motion-safe:hover:-translate-y-0.5 active:translate-y-0";
 

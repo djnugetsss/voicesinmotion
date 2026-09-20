@@ -19,6 +19,9 @@
   --text-eyebrow: clamp(0.6875rem, 0.64rem + 0.2vw, 0.8125rem);
   --text-display: clamp(2.875rem, 1.55rem + 5.65vw, 7rem);
   --text-lead: clamp(1.0625rem, 0.98rem + 0.36vw, 1.3125rem);
+  --text-quote: clamp(1.875rem, 1.05rem + 3.5vw, 4.25rem);
+  --text-section: clamp(1.875rem, 1.3rem + 2.45vw, 3.5rem);
+  --text-stat: clamp(2.75rem, 1.9rem + 3.6vw, 5rem);
 
   --ease-stage: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -102,6 +105,35 @@ body {
 
 @utility text-balance-tight {
   text-wrap: balance;
+}
+
+/* One page shell, shared by every section. */
+.shell {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 88rem;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .shell {
+    padding-inline: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .shell {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Aligns a horizontally-scrubbed track's first item with the page shell,
+   and leaves room past the last one. */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .track-gutter {
+    padding-left: max(2.5rem, calc((100vw - 88rem) / 2 + 2.5rem));
+    padding-right: 20vw;
+  }
 }
 
 .hairline {

@@ -12,7 +12,7 @@ export const siteMeta: SiteMeta = {
 export const navLinks: NavLink[] = [
   { label: "Home", href: "/", kind: "route" },
   { label: "Workshops", href: "/#workshops", kind: "anchor" },
-  { label: "Private Lessons", href: "/#private-lessons", kind: "anchor" },
+  { label: "Private Lessons", href: "/#lessons", kind: "anchor" },
   { label: "Reviews", href: "/#reviews", kind: "anchor" },
   { label: "About", href: "/about", kind: "route" },
   { label: "Media", href: "/media", kind: "route" },

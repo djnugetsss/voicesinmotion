@@ -83,7 +83,7 @@ export function Hero() {
       </div>
 
       {/* ---- Content ---- */}
-      <div className="relative mx-auto w-full max-w-[88rem] px-5 sm:px-7 lg:px-10">
+      <div className="shell relative">
         <div className="max-w-[min(100%,52rem)]">
           <RevealBlock direction="up" distance={14} duration={0.7}>
             <p className="flex items-center gap-2.5 text-[length:var(--text-eyebrow)] font-medium tracking-[0.2em] text-ink/55 uppercase">
@@ -137,7 +137,7 @@ export function Hero() {
 
       {/* ---- Scroll cue ---- */}
       <div className="absolute inset-x-0 bottom-7 sm:bottom-9">
-        <div className="mx-auto w-full max-w-[88rem] px-5 sm:px-7 lg:px-10">
+        <div className="shell">
           <ScrollCue label={hero.scrollCue} progress={scrollYProgress} />
         </div>
       </div>

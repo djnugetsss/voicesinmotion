@@ -1,7 +1,9 @@
 "use client";
 
-import { motion, useTransform, type MotionValue } from "motion/react";
+import { motion, type MotionValue } from "motion/react";
+import { useCallback } from "react";
 import { usePrefersReducedMotion } from "@/components/motion/use-media-preference";
+import { useScrubbedStyle } from "@/components/motion/use-scrubbed-style";
 
 /** The small "Scroll" affordance that dissolves as the hero leaves. */
 export function ScrollCue({
@@ -12,15 +14,18 @@ export function ScrollCue({
   progress: MotionValue<number>;
 }) {
   const reduced = usePrefersReducedMotion();
-  const opacity = useTransform(progress, [0, 0.18], [1, 0]);
-  const y = useTransform(progress, [0, 0.18], [0, 14]);
+
+  const apply = useCallback((element: HTMLDivElement, p: number) => {
+    const t = p < 0 ? 0 : p > 0.18 ? 1 : p / 0.18;
+    element.style.opacity = (1 - t).toFixed(3);
+    element.style.transform = `translate3d(0, ${(t * 14).toFixed(2)}px, 0)`;
+    element.style.willChange = t >= 1 ? "auto" : "transform, opacity";
+  }, []);
+
+  const ref = useScrubbedStyle<HTMLDivElement>(progress, apply, !reduced);
 
   return (
-    <motion.div
-      className="flex items-center gap-3"
-      style={reduced ? undefined : { opacity, y, willChange: "transform, opacity" }}
-      aria-hidden="true"
-    >
+    <div ref={ref} className="flex items-center gap-3" aria-hidden="true">
       <span className="text-[0.6875rem] tracking-[0.22em] text-ink/45 uppercase">
         {label}
       </span>
@@ -39,6 +44,6 @@ export function ScrollCue({
           />
         )}
       </span>
-    </motion.div>
+    </div>
   );
 }
