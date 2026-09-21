@@ -34,6 +34,13 @@ export type RevealWordsProps = {
   /** Replay every time it re-enters the viewport. */
   once?: boolean;
   /**
+   * Granularity of the split. `letter` cascades character by character, which
+   * suits a short wordmark but is far too busy for a sentence. It is only
+   * honoured alongside `eager`, since a per-character entrance belongs on
+   * first paint rather than on a scroll trigger.
+   */
+  splitBy?: "word" | "letter";
+  /**
    * Above-the-fold treatment: the entrance runs from CSS instead of Framer,
    * so it paints as soon as the stylesheet lands rather than waiting on
    * hydration, and still reads correctly with no JS at all. Use it for any
@@ -150,6 +157,7 @@ export function RevealWords({
   distance = 22,
   blur = 10,
   once = true,
+  splitBy = "word",
   eager = false,
   progress,
   scrubRange = [0, 1],
@@ -170,6 +178,48 @@ export function RevealWords({
   const Tag = as;
 
   if (eager && !scrubbed) {
+    if (splitBy === "letter") {
+      // Delays ease out rather than stepping linearly, so the cascade settles
+      // instead of arriving at a metronome beat.
+      const total = words.reduce((n, word) => n + word.length, 0);
+      const delayFor = (i: number) =>
+        delay + stagger * Math.pow(i, 0.92) * (total > 1 ? 1 : 0);
+
+      let index = -1;
+
+      return (
+        // The characters are split for presentation only, so the heading is
+        // named as a whole and the spans are kept out of the tree.
+        <Tag id={id} className={className} aria-label={text}>
+          {words.map((word, w) => (
+            <Fragment key={`${word}-${w}`}>
+              {/* Inline-block per word so a line break never lands mid-word. */}
+              <span aria-hidden="true" className="inline-block whitespace-nowrap">
+                {Array.from(word).map((character, c) => {
+                  index += 1;
+                  return (
+                    <span
+                      key={`${character}-${c}`}
+                      className={cn("word-in inline-block", wordClassName)}
+                      style={{
+                        animationDelay: `${delayFor(index).toFixed(3)}s`,
+                        animationDuration: `${duration}s`,
+                        ["--word-rise" as string]: `${distance}px`,
+                        ["--word-blur" as string]: `${blur}px`,
+                      }}
+                    >
+                      {character}
+                    </span>
+                  );
+                })}
+              </span>
+              {w < words.length - 1 ? " " : null}
+            </Fragment>
+          ))}
+        </Tag>
+      );
+    }
+
     return (
       <Tag id={id} className={className}>
         {words.map((word, i) => (

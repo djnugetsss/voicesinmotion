@@ -69,15 +69,16 @@ export function Hero() {
 
           <RevealWords
             eager
+            splitBy="letter"
             as="h1"
             id="hero-heading"
             text={hero.headline}
             className="font-display mt-5 text-[length:var(--text-display)] text-balance-tight text-ink sm:mt-7"
-            stagger={0.055}
-            delay={0.12}
-            duration={0.95}
-            distance={26}
-            blur={12}
+            stagger={0.038}
+            delay={0.1}
+            duration={0.9}
+            distance={30}
+            blur={14}
           />
 
           <RevealBlock eager delay={0.3} distance={20}>

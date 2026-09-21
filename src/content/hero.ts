@@ -1,8 +1,11 @@
 import type { HeroContent } from "./types";
+import { siteMeta } from "./site";
 
 export const hero: HeroContent = {
   eyebrow: "Speech & Debate Coaching",
-  headline: "Find your voice. Then use it.",
+  // The wordmark itself. Driven from siteMeta so it can never drift out
+  // of step with the one in the header.
+  headline: siteMeta.name,
   subhead:
     "Free workshops and private coaching for Elementary, Middle, and High School students, taught by experienced competitors and state finalists.",
   primaryCta: {
