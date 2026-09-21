@@ -36,7 +36,7 @@ export function Hero() {
           the headline. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[84%] -z-10 h-[20vh] max-h-[170px] min-h-[110px] -translate-y-1/2 md:top-1/2 md:h-[46vh] md:max-h-[460px] md:min-h-[240px]"
+        className="pointer-events-none absolute inset-x-0 top-[84%] -z-10 h-[20vh] max-h-[170px] min-h-[110px] -translate-y-1/2 md:top-[44%] md:h-[42vh] md:max-h-[420px] md:min-h-[220px]"
       >
         <Parallax rate={-0.06} className="h-full">
           <Waveform
@@ -82,7 +82,15 @@ export function Hero() {
           />
 
           <RevealBlock eager delay={0.3} distance={20}>
-            <p className="mt-6 max-w-[46ch] text-[length:var(--text-lead)] leading-[1.6] text-ink/70 sm:mt-8">
+            {/*
+              The gap opens up from `md`, where the waveform band is centred on
+              the viewport. Both the band and this column are vertically
+              centred, so the extra room lands exactly where the wave crosses
+              and it passes cleanly between the wordmark and this paragraph
+              instead of running through the text. Below `md` the band sits
+              down near the bottom of the hero, so the tight spacing stays.
+            */}
+            <p className="mt-6 max-w-[46ch] text-[length:var(--text-lead)] leading-[1.6] text-ink/70 sm:mt-8 md:mt-[7rem]">
               {hero.subhead}
             </p>
           </RevealBlock>
