@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { RevealBlock, RevealWords } from "@/components/motion";
 import { Section, SectionEyebrow } from "@/components/layout/Section";
 import { MediaGallery } from "@/components/sections/media/MediaGallery";
-import { media, siteMeta } from "@/content";
+import { media, showMedia, siteMeta } from "@/content";
 
 export const metadata: Metadata = {
   title: "Media",
@@ -18,6 +19,10 @@ export const metadata: Metadata = {
 };
 
 export default function MediaPage() {
+  /* The page is pulled for now, not deleted: everything below still works.
+     Flip `showMedia` in `content/flags.ts` to bring it back. */
+  if (!showMedia) redirect("/");
+
   return (
     <Section
       tone="mist"

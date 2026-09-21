@@ -127,7 +127,10 @@ export function WhySection() {
         </div>
 
         {/* ---- Counted stats ---- */}
-        <ul className="mt-16 grid gap-4 sm:mt-20 sm:grid-cols-3 sm:gap-5">
+        {/* Two stats, so the row is a matched pair on the same column rhythm
+            as the paragraphs above rather than a three-up grid with a hole
+            in it. It follows `why.stats`, whatever its length. */}
+        <ul className="mt-16 grid gap-4 sm:mt-20 sm:grid-cols-2 sm:gap-5">
           {why.stats.map((stat, i) => (
             <RevealBlock key={stat.id} as="li" delay={i * 0.1} distance={22}>
               <div

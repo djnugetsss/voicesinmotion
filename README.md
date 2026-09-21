@@ -27,22 +27,23 @@ Node 20 or newer.
 
 ## Where the content lives
 
-**Every string, link, date and price on the site is in `src/content/`.** You
+**Every string, link and date on the site is in `src/content/`.** You
 should not need to open a component to change copy.
 
 | File | What it controls |
 |---|---|
 | `site.ts` | Site name, tagline, meta description, nav links, Instagram URL, the nav "Book a free lesson" button |
 | `hero.ts` | Home hero: eyebrow, headline, subhead, both buttons |
-| `why.ts` | Emerson quote, the two supporting paragraphs, **the three stat numbers** |
+| `why.ts` | Emerson quote, the two supporting paragraphs, **the stat numbers** |
 | `programs.ts` | Free Group Workshops and Private Lessons cards, including every CTA link |
-| `summer.ts` | **The three summer sessions, their dates, and the price badge** |
+| `workshops.ts` | **The upcoming sessions, their dates, and their sign-up links** |
 | `reviews.ts` | Testimonials |
 | `team.ts` | The team: founders and staff, with roles, bios, highlights, headshots |
 | `closing.ts` | The dark closing band: headline, subhead, both buttons |
 | `footer.ts` | Footer blurb, footer links, contact email, copyright |
 | `about.ts` | The `/about` page heading and intro (the page is just the roster) |
-| `media.ts` | Everything on `/media`: gallery items and filter labels |
+| `media.ts` | Everything on `/media`: gallery items and filter labels (the route is off, see `flags.ts`) |
+| `flags.ts` | Feature switches. Currently just `showMedia`, which turns the `/media` route on and off |
 | `types.ts` | The shape of all of the above. Worth a look before adding fields. |
 
 ### Placeholders
@@ -54,8 +55,7 @@ Anything still invented is marked `placeholder: true` in content and renders
 document.querySelectorAll('[data-placeholder]')
 ```
 
-Currently placeholder: two of the three stat numbers, the summer price,
-and every gallery item.
+Currently placeholder: every gallery item. Both stat numbers are real.
 
 ---
 
@@ -137,26 +137,49 @@ shift because of it, and a wrong number gives you a wrong-shaped crop.
 Files go in `public/media/`. The masonry rebalances itself and the filters pick
 up the new `category` automatically.
 
-### Change the summer dates or price
+### Change an upcoming workshop, or open its sign-up
 
-`src/content/summer.ts`. Dates:
-
-```ts
-{ id: "speech", marker: "01", name: "Speech Workshop", dates: "June 24–28", kind: "free" }
-```
-
-Price badge:
+`src/content/workshops.ts`. One entry per session:
 
 ```ts
-price: { label: "Price", value: "TBA", placeholder: true }
+{
+  id: "community-workshop",
+  marker: "01",
+  name: "Community Workshop",
+  dates: "October 24–25, 2026",
+  description: "Optional. One line under the dates.",
+  signupUrl: null,
+}
 ```
 
-Set `value: "$150"` and `placeholder: false`. The badge is styled from this one
-object. No component changes. `kind: "paid"` is what gives a session the gold
-treatment and shows the price badge.
+**`signupUrl` is the whole sign-up mechanism.** While it is `null` the card
+shows a muted "Sign-up opens soon" chip. Paste the form link in:
 
-Adding a fourth session just works: the timeline measures the track and
-lengthens the scroll accordingly.
+```ts
+signupUrl: "https://docs.google.com/forms/d/e/…/viewform",
+```
+
+and the same card renders a live "Sign up" button instead. That is the only
+edit. Both button labels live on `signupLabel` and `signupPendingLabel` in the
+same file.
+
+Sessions are not labelled free or paid and no price is shown, because none of
+that is confirmed. Adding or removing a session just works: the timeline
+measures the track and lengthens the scroll accordingly, and the cards divide
+the scroll between however many there are.
+
+### Turn the media page back on
+
+`src/content/flags.ts`:
+
+```ts
+export const showMedia: boolean = false;
+```
+
+Set it to `true`. That one value restores the Media link in the nav, the
+mobile menu and the footer, stops `/media` redirecting to the home page, and
+puts the route back in `sitemap.ts`. The route, the gallery, the lightbox and
+`media.ts` were never removed.
 
 ---
 
@@ -172,7 +195,7 @@ lengthens the scroll accordingly.
 | `--color-azure` `#5C87C4` | Fills, strokes, borders, the waveform |
 | `--color-azure-ink` `#456797` | **Azure for text.** Plain azure is only 3.57:1 on paper, too low for small text. Use this for any azure-coloured words. |
 | `--color-ink` `#101B2E` | Body text |
-| `--color-gold` `#D9A441` | Sparingly: the closing CTA, the price badge |
+| `--color-gold` `#D9A441` | Sparingly: the hero eyebrow dot, the nav and closing CTAs |
 
 Ink below 65% opacity drops under 4.5:1 on light backgrounds. `text-ink/65` is
 the floor for small text.

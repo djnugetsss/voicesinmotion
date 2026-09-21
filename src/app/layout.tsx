@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     "public speaking coaching",
     "debate coach",
     "student speech workshops",
-    "summer speech camp",
+    "youth public speaking classes",
   ],
   openGraph: {
     title: `${siteMeta.name}: ${siteMeta.tagline}`,

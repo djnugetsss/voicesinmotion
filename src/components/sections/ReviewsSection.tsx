@@ -115,6 +115,15 @@ export function ReviewsSection() {
             {[0, 1].map((copy) =>
               base.map((review, i) => {
                 const lane = lanes[i % lanes.length];
+                /*
+                  `base` already repeats the list as many times as it takes to
+                  fill the track, and the seamless loop then renders the whole
+                  thing twice. Everything past the first pass of the original
+                  list is decoration: hidden from assistive tech and made
+                  inert, so each review is announced once and nothing in the
+                  repeats can take focus.
+                */
+                const duplicate = copy !== 0 || i >= list.length;
                 return (
                   <Parallax
                     key={`${copy}-${review.id}-${i}`}
@@ -124,9 +133,8 @@ export function ReviewsSection() {
                     <div
                       data-review-card
                       style={{ transform: `translateY(${lane.offset}px)` }}
-                      // The second pass is decoration; one copy is enough for
-                      // anyone reading the page with a screen reader.
-                      aria-hidden={copy === 1 ? "true" : undefined}
+                      aria-hidden={duplicate || undefined}
+                      inert={duplicate}
                     >
                       <ReviewCard review={review} />
                     </div>

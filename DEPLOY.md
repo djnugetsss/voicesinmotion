@@ -36,7 +36,7 @@ all three pages.
 
 On the `.vercel.app` URL:
 
-- [ ] Home, `/about` and `/media` all load
+- [ ] Home and `/about` load, and `/media` redirects home (it is off: see `content/flags.ts`)
 - [ ] Both Google Form links and the Calendly link open correctly
 - [ ] The Instagram link goes to the right account
 - [ ] It looks right on your phone, not just your laptop

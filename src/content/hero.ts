@@ -14,8 +14,8 @@ export const hero: HeroContent = {
     external: true,
   },
   secondaryCta: {
-    label: "See summer workshops",
-    href: "#workshops",
+    label: "See upcoming workshops",
+    href: "#upcoming",
   },
   scrollCue: "Scroll",
 };

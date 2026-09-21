@@ -20,9 +20,8 @@ export const programs: ProgramsContent = {
       ],
       ctas: [
         {
-          label: "Sign up for summer workshops",
-          href: "https://docs.google.com/forms/d/e/1FAIpQLSeDEe_dA-TavbChmoVPhfHpz-vaMm8Oks_Or1VwxuAwbtI0tw/viewform",
-          external: true,
+          label: "See upcoming workshops",
+          href: "#upcoming",
         },
       ],
       tone: "workshops",

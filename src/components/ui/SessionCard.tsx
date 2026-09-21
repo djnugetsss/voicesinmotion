@@ -1,30 +1,33 @@
 "use client";
 
 import { motion, useTransform, type MotionValue } from "motion/react";
-import { cn } from "@/lib/cn";
-import type { PriceBadge, Session } from "@/content";
+import { ActionLink } from "@/components/ui/ActionLink";
+import type { WorkshopSession } from "@/content";
 
-export function PriceTag({ price }: { price: PriceBadge }) {
+/**
+ * The muted state a session sits in until its form exists. Deliberately not a
+ * button: there is nothing to press yet, and nothing here should read as one.
+ */
+function SignupPending({ label }: { label: string }) {
   return (
-    <span
-      data-placeholder={price.placeholder || undefined}
-      className="inline-flex items-center gap-2 rounded-full border border-gold/60 px-3.5 py-1.5 text-[0.6875rem] font-medium tracking-[0.16em] text-ink/80 uppercase"
-    >
-      <span aria-hidden="true" className="size-1.5 rounded-full bg-gold" />
-      {price.label}: {price.value}
+    <span className="inline-flex items-center gap-2 rounded-full border border-ink/12 px-3.5 py-1.5 text-[0.6875rem] font-medium tracking-[0.16em] text-ink/65 uppercase">
+      <span aria-hidden="true" className="size-1.5 rounded-full bg-ink/30" />
+      {label}
     </span>
   );
 }
 
 export function SessionCard({
   session,
-  price,
+  signupLabel,
+  signupPendingLabel,
   progress,
   range,
   scrubbed,
 }: {
-  session: Session;
-  price: PriceBadge;
+  session: WorkshopSession;
+  signupLabel: string;
+  signupPendingLabel: string;
   progress: MotionValue<number>;
   /** Progress window over which this card slides in and locks. */
   range: [number, number];
@@ -35,8 +38,6 @@ export function SessionCard({
   const y = useTransform(t, [0, 1], [40, 0]);
   const scale = useTransform(t, [0, 1], [0.95, 1]);
 
-  const isPaid = session.kind === "paid";
-
   return (
     <motion.article
       aria-labelledby={`${session.id}-name`}
@@ -45,37 +46,20 @@ export function SessionCard({
           ? { opacity, y, scale, willChange: "transform, opacity" }
           : undefined
       }
-      className={cn(
-        "relative flex shrink-0 flex-col overflow-hidden rounded-[1.5rem] border p-7 sm:rounded-[1.75rem] sm:p-8",
-        "w-full motion-safe:lg:w-[28rem]",
-        isPaid ? "border-gold/35" : "border-ink/10",
-      )}
+      className="relative flex w-full shrink-0 flex-col overflow-hidden rounded-[1.5rem] border border-ink/10 p-7 motion-safe:lg:w-[28rem] sm:rounded-[1.75rem] sm:p-8"
     >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
-          backgroundImage: isPaid
-            ? "linear-gradient(158deg, color-mix(in oklab, var(--paper) 94%, transparent) 0%, color-mix(in oklab, var(--gold) 14%, transparent) 100%)"
-            : "linear-gradient(158deg, color-mix(in oklab, var(--paper) 92%, transparent) 0%, color-mix(in oklab, var(--sky) 26%, transparent) 100%)",
+          backgroundImage:
+            "linear-gradient(158deg, color-mix(in oklab, var(--paper) 92%, transparent) 0%, color-mix(in oklab, var(--sky) 26%, transparent) 100%)",
         }}
       />
 
-      <div className="flex items-center justify-between gap-4">
-        <span className="font-display text-[1.75rem] leading-none text-azure-ink">
-          {session.marker}
-        </span>
-        <span
-          className={cn(
-            "rounded-full border px-3 py-1 text-[0.6875rem] font-medium tracking-[0.14em] uppercase",
-            isPaid
-              ? "border-gold/50 text-ink/70"
-              : "border-azure/40 text-azure-ink",
-          )}
-        >
-          {isPaid ? "Paid" : "Free"}
-        </span>
-      </div>
+      <span className="font-display text-[1.75rem] leading-none text-azure-ink">
+        {session.marker}
+      </span>
 
       <h3
         id={`${session.id}-name`}
@@ -94,11 +78,22 @@ export function SessionCard({
         </p>
       ) : null}
 
-      {isPaid ? (
-        <div className="mt-auto pt-8">
-          <PriceTag price={price} />
-        </div>
-      ) : null}
+      {/* One field decides this: a `signupUrl` is a live button, `null` is the
+          muted state above it. See the note in `content/workshops.ts`. */}
+      <div className="mt-auto pt-8">
+        {session.signupUrl ? (
+          <ActionLink
+            href={session.signupUrl}
+            external
+            variant="primary"
+            size="md"
+          >
+            {signupLabel}
+          </ActionLink>
+        ) : (
+          <SignupPending label={signupPendingLabel} />
+        )}
+      </div>
     </motion.article>
   );
 }

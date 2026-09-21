@@ -1,4 +1,5 @@
 import type { Cta, NavLink, SiteMeta, SocialLink } from "./types";
+import { showMedia } from "./flags";
 
 export const siteMeta: SiteMeta = {
   name: "Voices In Motion",
@@ -9,14 +10,17 @@ export const siteMeta: SiteMeta = {
   url: "https://voicesinmotion.net",
 };
 
-export const navLinks: NavLink[] = [
-  { label: "Home", href: "/", kind: "route" },
-  { label: "Workshops", href: "/#workshops", kind: "anchor" },
-  { label: "Private Lessons", href: "/#lessons", kind: "anchor" },
-  { label: "Reviews", href: "/#reviews", kind: "anchor" },
-  { label: "About", href: "/about", kind: "route" },
-  { label: "Media", href: "/media", kind: "route" },
-];
+/* The Media entry is dropped while `showMedia` is false. See `flags.ts`. */
+export const navLinks: NavLink[] = (
+  [
+    { label: "Home", href: "/", kind: "route" },
+    { label: "Workshops", href: "/#workshops", kind: "anchor" },
+    { label: "Private Lessons", href: "/#lessons", kind: "anchor" },
+    { label: "Reviews", href: "/#reviews", kind: "anchor" },
+    { label: "About", href: "/about", kind: "route" },
+    { label: "Media", href: "/media", kind: "route" },
+  ] satisfies NavLink[]
+).filter((link) => showMedia || link.href !== "/media");
 
 export const socialLinks: SocialLink[] = [
   {

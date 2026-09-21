@@ -1,12 +1,11 @@
 import type { WhyContent } from "./types";
 
 /* ---------------------------------------------------------------------------
- * PLACEHOLDER NUMBERS
+ * The stat row
  *
- * Every `value` in `stats` below is invented filler, marked `placeholder: true`.
- * Replace the numbers (and the labels, if they do not match what you count)
- * and set `placeholder: false`. Nothing else needs to change: the cards read
- * `value`, `suffix` and `decimals` straight from here and count up to them.
+ * Both numbers below are real, so both are `placeholder: false`. The cards
+ * read `value`, `suffix` and `decimals` straight from here and count up to
+ * them, and the row is laid out for the number of stats in the list.
  * ------------------------------------------------------------------------- */
 
 export const why: WhyContent = {
@@ -30,16 +29,9 @@ export const why: WhyContent = {
     },
     {
       id: "workshops",
-      value: 40,
-      suffix: "+",
-      label: "Free workshop hours taught",
-      placeholder: true,
-    },
-    {
-      id: "finalists",
-      value: 8,
-      label: "State finalists on the coaching staff",
-      placeholder: true,
+      value: 12,
+      label: "Workshops hosted",
+      placeholder: false,
     },
   ],
 };

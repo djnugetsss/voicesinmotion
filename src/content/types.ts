@@ -85,30 +85,31 @@ export type ProgramsContent = {
   programs: Program[];
 };
 
-export type Session = {
+export type WorkshopSession = {
   id: string;
   /** Display ordinal on the timeline marker, e.g. "01". */
   marker: string;
   name: string;
   dates: string;
   description?: string;
-  kind: "free" | "paid";
+  /**
+   * The sign-up form for this session. `null` until the form exists, which
+   * renders the muted "opens soon" state instead of a button. Paste a URL in
+   * and the card renders a live sign-up button. That is the only edit needed.
+   */
+  signupUrl: string | null;
 };
 
-export type PriceBadge = {
-  label: string;
-  value: string;
-  /** True while `value` is not yet the real price. */
-  placeholder: boolean;
-};
-
-export type SummerContent = {
+export type WorkshopsContent = {
   id: string;
   eyebrow: string;
   title: string;
   intro: string;
-  price: PriceBadge;
-  sessions: Session[];
+  /** Button label once a session has a `signupUrl`. */
+  signupLabel: string;
+  /** Shown in its place while `signupUrl` is still `null`. */
+  signupPendingLabel: string;
+  sessions: WorkshopSession[];
 };
 
 export type Review = {

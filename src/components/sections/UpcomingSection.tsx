@@ -11,7 +11,7 @@ import {
 import { Section, SectionEyebrow } from "@/components/layout/Section";
 import { SessionCard } from "@/components/ui/SessionCard";
 import { Waveform } from "@/components/ui/Waveform";
-import { summer } from "@/content";
+import { workshops } from "@/content";
 
 /**
  * The line between two stops. A waveform on the pinned desktop timeline whose
@@ -52,7 +52,7 @@ function TimelineConnector({
   );
 }
 
-export function SummerSection() {
+export function UpcomingSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -106,7 +106,7 @@ export function SummerSection() {
   const shift = pinned ? metrics.shift : 0;
   const x = useTransform(scrollYProgress, [0, 1], [0, -shift]);
 
-  const count = summer.sessions.length;
+  const count = workshops.sessions.length;
 
   // The first card is already on screen when the pin engages, so its window
   // sits entirely before progress 0. It is locked from the first frame.
@@ -120,11 +120,11 @@ export function SummerSection() {
 
   return (
     <Section
-      id={summer.id}
+      id={workshops.id}
       tone="sky"
       size="flush"
       contained={false}
-      labelledBy="summer-heading"
+      labelledBy="upcoming-heading"
     >
       <div ref={sectionRef} style={pinned && metrics.height ? { height: metrics.height } : undefined}>
         <div
@@ -133,13 +133,13 @@ export function SummerSection() {
         >
           <div className="shell">
             <RevealBlock>
-              <SectionEyebrow>{summer.eyebrow}</SectionEyebrow>
+              <SectionEyebrow>{workshops.eyebrow}</SectionEyebrow>
             </RevealBlock>
 
             <RevealWords
               as="h2"
-              id="summer-heading"
-              text={summer.title}
+              id="upcoming-heading"
+              text={workshops.title}
               className="font-display mt-6 text-[length:var(--text-section)] text-ink"
               stagger={0.05}
               distance={22}
@@ -147,7 +147,7 @@ export function SummerSection() {
 
             <RevealBlock delay={0.2}>
               <p className="mt-5 max-w-[42ch] text-[length:var(--text-lead)] leading-[1.6] text-ink/70">
-                {summer.intro}
+                {workshops.intro}
               </p>
             </RevealBlock>
           </div>
@@ -157,7 +157,7 @@ export function SummerSection() {
             style={{ x, willChange: pinned ? "transform" : "auto" }}
             className="track-gutter mx-auto mt-12 flex w-full max-w-[36rem] flex-col items-center gap-0 px-5 sm:mt-14 sm:px-7 motion-safe:lg:mx-0 motion-safe:lg:mt-16 motion-safe:lg:max-w-none motion-safe:lg:w-max motion-safe:lg:flex-row motion-safe:lg:items-center motion-safe:lg:px-0"
           >
-            {summer.sessions.map((session, i) => (
+            {workshops.sessions.map((session, i) => (
               <Fragment key={session.id}>
                 {i > 0 ? (
                   <TimelineConnector
@@ -170,7 +170,8 @@ export function SummerSection() {
                 {pinned ? (
                   <SessionCard
                     session={session}
-                    price={summer.price}
+                    signupLabel={workshops.signupLabel}
+                    signupPendingLabel={workshops.signupPendingLabel}
                     progress={scrollYProgress}
                     range={cardRange(i)}
                     scrubbed
@@ -179,7 +180,8 @@ export function SummerSection() {
                   <RevealBlock className="w-full" delay={i * 0.08} distance={24}>
                     <SessionCard
                       session={session}
-                      price={summer.price}
+                      signupLabel={workshops.signupLabel}
+                      signupPendingLabel={workshops.signupPendingLabel}
                       progress={scrollYProgress}
                       range={cardRange(i)}
                       scrubbed={false}
