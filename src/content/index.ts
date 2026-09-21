@@ -5,7 +5,7 @@ export * from "./why";
 export * from "./programs";
 export * from "./summer";
 export * from "./reviews";
-export * from "./coaches";
+export * from "./team";
 export * from "./closing";
 export * from "./footer";
 export * from "./about";

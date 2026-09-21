@@ -129,31 +129,40 @@ export type ReviewsContent = {
   reviews: Review[];
 };
 
-export type Coach = {
-  id: string;
+export type TeamTier = "founder" | "staff";
+
+export type TeamMember = {
+  slug: string;
   name: string;
   role: string;
-  /** Events this coach competes in or coaches, as one display string. */
-  events: string;
-  achievements: string[];
-  /** Shown when the card is expanded on /about. */
-  bio: string;
+  tier: TeamTier;
+  /** One entry per paragraph. Reproduced verbatim, never edited. */
+  bio: string[];
+  /** Founders only. Short, factual credits shown on the card. */
+  highlights?: string[];
+  /** Path under `public/`. */
+  photo: string;
   /**
-   * Portrait, rendered in a 4:5 box. Leave `null` for the gradient
-   * placeholder. Drop in `{ src, alt }` and the image takes over with no
-   * other change.
+   * CSS object-position for the face, e.g. "50% 38%". The headshots are
+   * cropped differently, so this is what lines the faces up across cards.
+   * It doubles as the transform-origin the founder medallion zooms toward.
    */
-  photo: { src: string; alt: string } | null;
-  /** True while the person and their record are invented scaffolding. */
-  placeholder: boolean;
+  photoFocus: string;
+  /**
+   * Per-person zoom. The two founder headshots were taken at different
+   * subject distances, so focus alone cannot make the heads read at the same
+   * size. 1 is the photo as supplied.
+   */
+  photoZoom?: number;
 };
 
-export type CoachesContent = {
+export type TeamContent = {
   id: string;
   eyebrow: string;
-  title: string;
-  intro: string;
-  coaches: Coach[];
+  foundersTitle: string;
+  foundersIntro: string;
+  staffTitle: string;
+  members: TeamMember[];
 };
 
 export type ClosingContent = {

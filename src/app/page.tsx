@@ -1,5 +1,5 @@
 import { ClosingSection } from "@/components/sections/ClosingSection";
-import { CoachesSection } from "@/components/sections/CoachesSection";
+import { TeamSection } from "@/components/sections/TeamSection";
 import { Hero } from "@/components/sections/Hero";
 import { ProgramsSection } from "@/components/sections/ProgramsSection";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
@@ -14,7 +14,7 @@ export default function HomePage() {
       <ProgramsSection />
       <SummerSection />
       <ReviewsSection />
-      <CoachesSection />
+      <TeamSection />
       <ClosingSection />
     </>
   );

@@ -89,8 +89,8 @@ export const about: AboutContent = {
   },
   roster: {
     eyebrow: "The full roster",
-    title: "Meet the coaches.",
+    title: "Meet the founders.",
     intro:
-      "Select a coach to read more about how they work and what they compete in.",
+      "Select a founder to read their full bio. The wider team is listed below.",
   },
 };

@@ -1,4 +1,4 @@
-import { footer, siteMeta, socialLinks } from "@/content";
+import { footer, founders, siteMeta, socialLinks } from "@/content";
 
 /**
  * EducationalOrganization JSON-LD. Rendered once, in the root layout, so it
@@ -28,6 +28,17 @@ export function StructuredData() {
       ],
     },
     teaches: ["Public speaking", "Competitive debate", "Persuasive communication"],
+    founder: founders.map((member) => ({
+      "@type": "Person",
+      name: member.name,
+      jobTitle: member.role,
+      image: `${siteMeta.url}${member.photo}`,
+    })),
+    employee: founders.map((member) => ({
+      "@type": "Person",
+      name: member.name,
+      jobTitle: member.role,
+    })),
   };
 
   return (

@@ -38,7 +38,7 @@ should not need to open a component to change copy.
 | `programs.ts` | Free Group Workshops and Private Lessons cards, including every CTA link |
 | `summer.ts` | **The three summer sessions, their dates, and the price badge** |
 | `reviews.ts` | Testimonials |
-| `coaches.ts` | The coach roster: names, roles, events, achievements, bios, photos |
+| `team.ts` | The team: founders and staff, with roles, bios, highlights, headshots |
 | `closing.ts` | The dark closing band: headline, subhead, both buttons |
 | `footer.ts` | Footer blurb, footer links, contact email, copyright |
 | `about.ts` | Everything on `/about`: hero, story blocks, mission pillars |
@@ -54,8 +54,8 @@ Anything still invented is marked `placeholder: true` in content and renders
 document.querySelectorAll('[data-placeholder]')
 ```
 
-Currently placeholder: the three stat numbers, the summer price, all six
-coaches, every gallery item, and the `/about` story prose.
+Currently placeholder: two of the three stat numbers, the summer price,
+every gallery item, and the `/about` story prose.
 
 ---
 
@@ -79,30 +79,38 @@ Nothing else to change. The marquee measures itself and repeats the list as
 many times as it takes to fill the screen, so it works with two reviews or
 twenty. Only add reviews people actually wrote.
 
-### Add a coach
+### Add a team member
 
-In `src/content/coaches.ts`, append to `coaches`:
+In `src/content/team.ts`, append to `members`:
 
 ```ts
 {
-  id: "coach-7",
-  name: "Real Name",
-  role: "Coach, Debate",
-  events: "Lincoln–Douglas · Public Forum",
-  achievements: ["State Finalist", "2× National Qualifier"],
-  bio: "Shown when the card is expanded on /about.",
-  photo: { src: "/coaches/real-name.jpg", alt: "Real Name" },
-  placeholder: false,
+  slug: "first-last",
+  name: "First Last",
+  role: "Coach",
+  tier: "staff",                 // "founder" | "staff"
+  bio: ["One string per paragraph, verbatim as they wrote it."],
+  highlights: ["Optional, founders only"],
+  photo: "/team/first.png",
+  photoFocus: "50% 38%",         // object-position for the face
 }
 ```
 
-For the photo: drop the file in `public/coaches/` and set `photo`. Leave
-`photo: null` and you get a palette gradient in the same 4:5 box, so swapping
-one in shifts nothing on the page.
+`tier` is the only thing that decides where someone appears. Founders get the
+large cards at the top of the home section and the expandable bios on
+`/about`; staff get the compact cards underneath both. The lists are derived
+(`founders` and `staff` are exported from the same file), so nothing else
+needs changing.
 
-The home page shows the **first four**; `/about` shows the whole roster. To
-change how many the home page features, edit the `.slice(0, 4)` in
-`src/components/sections/CoachesSection.tsx`.
+**`photoFocus`** is what lines the faces up with each other. Headshots are
+cropped differently, so after adding one, put the new card next to an existing
+one and nudge the second value until the eyes sit at the same height. It is a
+plain CSS `object-position`.
+
+Headshots go in `public/team/`. Founder photos render as a circle inside a 4:5
+card; staff photos render as a small square. Two of the current founder
+headshots are circular crops on a black background, which is why the founder
+card clips to a circle. A normal rectangular headshot works fine too.
 
 ### Add a media item
 
