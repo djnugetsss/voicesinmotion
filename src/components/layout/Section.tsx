@@ -109,14 +109,14 @@ export type SectionProps = {
   innerClassName?: string;
   labelledBy?: string;
   label?: string;
-  /** Forwarded to the section element — `useScroll` targets need it. */
+  /** Forwarded to the section element: `useScroll` targets need it. */
   ref?: Ref<HTMLElement>;
 };
 
 /**
  * Page section: one wash, one rhythm, one shell.
  *
- * Deliberately never sets `overflow-hidden` on the section element — that
+ * Deliberately never sets `overflow-hidden` on the section element, which
  * would make it the scroll container for any `position: sticky` descendant
  * and quietly break the pinned sections. The wash layer clips itself instead.
  */

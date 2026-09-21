@@ -3,7 +3,7 @@ import type { AboutContent } from "./types";
 /* ---------------------------------------------------------------------------
  * PLACEHOLDER PROSE
  *
- * The story below is scaffolding written to the right shape and length — it is
+ * The story below is scaffolding written to the right shape and length. It is
  * not the real history of Voices In Motion. Replace every paragraph.
  *
  * Images: each block's `image.src` is `null`, which renders a palette gradient

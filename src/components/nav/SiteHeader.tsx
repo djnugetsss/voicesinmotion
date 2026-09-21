@@ -16,7 +16,7 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [threshold, setThreshold] = useState(600);
 
-  // The header changes state once the hero — one full viewport — is behind us.
+  // The header changes state once the hero (one full viewport) is behind us.
   useEffect(() => {
     const measure = () => setThreshold(window.innerHeight * 0.82);
     measure();

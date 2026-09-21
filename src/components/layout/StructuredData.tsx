@@ -1,4 +1,4 @@
-import { siteMeta, socialLinks } from "@/content";
+import { footer, siteMeta, socialLinks } from "@/content";
 
 /**
  * EducationalOrganization JSON-LD. Rendered once, in the root layout, so it
@@ -12,6 +12,7 @@ export function StructuredData() {
     alternateName: siteMeta.shortName,
     description: siteMeta.description,
     url: siteMeta.url,
+    ...(footer.email ? { email: footer.email.address } : {}),
     sameAs: socialLinks.map((social) => social.href),
     areaServed: {
       "@type": "Country",

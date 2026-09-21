@@ -20,8 +20,8 @@ export type TiltProps = {
  * Shared 3D tilt. Rotates its child toward the cursor on pointer move and
  * springs back on leave.
  *
- * Completely inert — a plain wrapper, no listeners, no motion values applied —
- * for coarse pointers and reduced-motion visitors.
+ * Completely inert for coarse pointers and reduced-motion visitors: a plain
+ * wrapper, no listeners, no motion values applied.
  */
 export function Tilt({
   children,

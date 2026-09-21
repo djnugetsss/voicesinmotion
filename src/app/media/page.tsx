@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: media.intro,
   alternates: { canonical: "/media" },
   openGraph: {
-    title: `Media — ${siteMeta.name}`,
+    title: `Media: ${siteMeta.name}`,
     description: media.intro,
     url: `${siteMeta.url}/media`,
     type: "website",

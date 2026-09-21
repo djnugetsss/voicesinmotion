@@ -6,7 +6,7 @@ export type ActionVariant =
   | "primary"
   | "secondary"
   | "gold"
-  /** Filled gold — the one loud button, for the closing band. */
+  /** Filled gold: the one loud button, for the closing band. */
   | "gold-solid"
   /** Outlined light, for use on the deep band. */
   | "outline-light";

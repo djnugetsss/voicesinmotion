@@ -28,7 +28,7 @@ export function PodiumIcon({ className }: { className?: string }) {
   );
 }
 
-/** Balance scales — the argument pillar. */
+/** Balance scales, the argument pillar. */
 export function ScalesIcon({ className }: { className?: string }) {
   return (
     <svg {...shared} className={className}>

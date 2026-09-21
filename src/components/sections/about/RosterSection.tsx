@@ -34,8 +34,8 @@ export function RosterSection() {
 
       {/*
         Denser than the home grid. Each cell carries `layout`, so opening one
-        card glides every other card to its new position instead of snapping —
-        that reflow is the layout animation, and it runs on transforms.
+        card glides every other card to its new position instead of snapping.
+        That reflow is the layout animation, and it runs on transforms.
       */}
       <ul className="mt-12 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
         {coaches.coaches.map((coach, i) => (

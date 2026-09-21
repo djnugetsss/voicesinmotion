@@ -2,7 +2,7 @@ import { RevealBlock, RevealWords } from "@/components/motion";
 import { Section, SectionEyebrow } from "@/components/layout/Section";
 import { about } from "@/content";
 
-/** Compact — a banner, not a viewport. */
+/** Compact: a banner, not a viewport. */
 export function AboutHero() {
   return (
     <Section

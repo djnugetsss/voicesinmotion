@@ -34,7 +34,7 @@ export function scrollToTarget(target: string | number, offset = 0) {
 /**
  * Lenis smooth scroll, driven off Motion's frame loop so scroll-linked
  * animations resolve in the same tick as the scroll itself. Disabled outright
- * under `prefers-reduced-motion` — native scrolling is the reduced state.
+ * under `prefers-reduced-motion`: native scrolling is the reduced state.
  */
 export function SmoothScroll() {
   const reduced = usePrefersReducedMotion();

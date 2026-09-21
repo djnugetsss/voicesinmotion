@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   The Stage — design tokens
+   The Stage: design tokens
    ------------------------------------------------------------------ */
 
 @theme {
@@ -10,7 +10,7 @@
   --color-sky: #a8c0e0;
   --color-azure: #5c87c4;
   /*
-    The same azure, darkened 30% toward ink. Not a new brand colour — it is
+    The same azure, darkened 30% toward ink. Not a new brand colour. It is
     what azure has to be for small text to clear 4.5:1 everywhere it lands:
     paper 5.64, mist 5.15, and 4.56 on the darkest corner of a card gradient
     (sky 26% over mist), which is the worst bed on the site.
@@ -83,7 +83,7 @@ body {
   off-screen until they enter view, which would widen the document. Clipped
   here rather than on `body`, whose overflow propagates to the viewport
   instead of clipping. `clip` does not establish a scroll container, so the
-  `position: sticky` pins keep working — `hidden` would silently break them.
+  `position: sticky` pins keep working. `hidden` would silently break them.
 */
 main {
   overflow-x: clip;
@@ -100,7 +100,7 @@ main {
 }
 
 /* ------------------------------------------------------------------
-   Focus — visible on everything interactive
+   Focus: visible on everything interactive
    ------------------------------------------------------------------ */
 
 :focus-visible {
@@ -174,11 +174,11 @@ main {
 }
 
 /* ------------------------------------------------------------------
-   Ambient gradient drift — transform + opacity only
+   Ambient gradient drift: transform + opacity only
    ------------------------------------------------------------------ */
 
 /*
-  Translate and opacity only — deliberately no `scale`. These layers carry a
+  Translate and opacity only, deliberately no `scale`. These layers carry a
   70–80px blur, and scaling a blurred layer forces the blur to re-rasterize
   every frame rather than being rasterized once and composited. Dropping the
   scale is what takes the hero from dropped frames to a steady 60.
@@ -199,7 +199,7 @@ main {
 .drift-b { animation: drift-b 62s var(--ease-stage) infinite; }
 
 /* ------------------------------------------------------------------
-   Eager entrance — CSS, not JS.
+   Eager entrance: CSS, not JS.
 
    Above-the-fold reveals run from the stylesheet so they paint as soon as
    CSS arrives instead of waiting for React to hydrate and Framer to set
@@ -226,7 +226,7 @@ main {
 .word-in { animation: word-in 0.9s var(--ease-stage) both; }
 
 /* ------------------------------------------------------------------
-   Marquee — one linear translate, paused on hover or keyboard focus.
+   Marquee: one linear translate, paused on hover or keyboard focus.
    The track holds the card list twice, so -50% lands back on a seam.
    ------------------------------------------------------------------ */
 
@@ -246,7 +246,7 @@ main {
 }
 
 /* ------------------------------------------------------------------
-   Reduced motion — global backstop. Each primitive also guards in JS.
+   Reduced motion: global backstop. Each primitive also guards in JS.
    ------------------------------------------------------------------ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -256,7 +256,7 @@ main {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     /* Delays too, or a staggered entrance still waits its turn before
-       snapping in — which reads as broken rather than as "no motion". */
+       snapping in, which reads as broken rather than as "no motion". */
     animation-delay: 0ms !important;
     transition-duration: 0.001ms !important;
     transition-delay: 0ms !important;

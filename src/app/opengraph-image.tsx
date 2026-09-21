@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { siteMeta } from "@/content";
 
-export const alt = `${siteMeta.name} — ${siteMeta.tagline}`;
+export const alt = `${siteMeta.name}: ${siteMeta.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

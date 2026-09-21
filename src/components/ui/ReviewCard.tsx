@@ -8,6 +8,10 @@ export function ReviewCard({
   review: Review;
   className?: string;
 }) {
+  // Either, both or neither may be missing, so build the line from whatever
+  // is actually there rather than assuming a separator is wanted.
+  const meta = [review.role, review.session].filter(Boolean).join(" · ");
+
   return (
     <figure
       className={cn(
@@ -21,7 +25,7 @@ export function ReviewCard({
     >
       {/*
         Oversized opening mark, behind the quote. Kept at z-0 rather than a
-        negative z-index — the card paints its own gradient background, and
+        negative z-index: the card paints its own gradient background, and
         anything behind that is invisible.
       */}
       <span
@@ -36,12 +40,10 @@ export function ReviewCard({
       </blockquote>
 
       <figcaption className="relative z-10 mt-auto flex flex-col gap-1 pt-8">
-        <span className="font-display text-[1.25rem] leading-none text-ink">
-          {review.name}
-        </span>
-        <span className="text-[0.875rem] text-ink/65">
-          {review.role} · {review.session}
-        </span>
+        <span className="text-[1rem] font-medium text-ink">{review.name}</span>
+        {meta ? (
+          <span className="text-[0.875rem] text-ink/65">{meta}</span>
+        ) : null}
       </figcaption>
     </figure>
   );

@@ -5,7 +5,7 @@ export const siteMeta: SiteMeta = {
   shortName: "Voices In Motion",
   tagline: "Speech & Debate Coaching",
   description:
-    "Free group workshops and private speech & debate coaching for Elementary, Middle, and High School students — taught by experienced competitors and state finalists.",
+    "Free group workshops and private speech & debate coaching for Elementary, Middle, and High School students, taught by experienced competitors and state finalists.",
   url: "https://voicesinmotion.net",
 };
 

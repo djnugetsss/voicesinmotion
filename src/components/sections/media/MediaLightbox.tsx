@@ -14,7 +14,7 @@ export function MediaLightbox({
   item,
   index,
   total,
-  /** True while the open item is the one that was clicked — the frame morphs
+  /** True while the open item is the one that was clicked. The frame morphs
    *  from that thumbnail. After arrowing away there is nothing to morph from,
    *  so it crossfades instead. */
   sharedLayout,
@@ -75,7 +75,7 @@ export function MediaLightbox({
           ref={panelRef}
           role="dialog"
           aria-modal="true"
-          aria-label={`${item.caption} — item ${index + 1} of ${total}`}
+          aria-label={`${item.caption}, item ${index + 1} of ${total}`}
           tabIndex={-1}
           onKeyDown={onKeyDown}
           className="fixed inset-0 z-[80] flex flex-col outline-none"

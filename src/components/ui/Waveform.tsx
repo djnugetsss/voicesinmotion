@@ -12,7 +12,7 @@ import {
 const VIEW_W = 1000;
 const VIEW_H = 400;
 const MID = VIEW_H / 2;
-/* 140 samples across a 1000-unit viewBox is ~7 units per segment — below the
+/* 140 samples across a 1000-unit viewBox is ~7 units per segment, below the
    threshold where faceting is visible on a sine, and ~25% less string building
    per frame than 180. */
 const SAMPLES = 140;
@@ -36,7 +36,7 @@ export type WaveformProps = {
   /** Bulge the wave toward the cursor. Desktop pointers only. */
   interactive?: boolean;
   /**
-   * Element the cursor is tracked across. Defaults to the SVG's parent — pass
+   * Element the cursor is tracked across. Defaults to the SVG's parent. Pass
    * the whole section when the wave is only a band inside it, so the bulge
    * does not drop out as the pointer crosses content layered above.
    */
@@ -47,7 +47,7 @@ export type WaveformProps = {
   bulgeWidth?: number;
   /**
    * Shape of the amplitude envelope across the width.
-   * `arc` swells at the centre and tapers to nothing at both edges — the
+   * `arc` swells at the centre and tapers to nothing at both edges, the
    * neutral choice for a divider. `rise` stays quiet on the left and opens up
    * toward the right, which keeps the wave off left-aligned type.
    */
@@ -76,7 +76,7 @@ type Strand = {
  *
  * Idles on a gentle sine, swells with scroll progress, and bulges locally
  * toward the cursor. The whole thing is one rAF loop writing `d` on a handful
- * of paths — no React state per frame, no layout properties touched. It pauses
+ * of paths: no React state per frame, no layout properties touched. It pauses
  * itself when scrolled out of view, and renders a single still frame under
  * `prefers-reduced-motion`.
  *
@@ -107,7 +107,7 @@ export function Waveform({
   const fine = usePointerFine();
   const cursorEnabled = interactive && fine && !reduced;
 
-  // Mutable animation inputs — read inside rAF, never through React state.
+  // Mutable animation inputs: read inside rAF, never through React state.
   const cursor = useRef({ x: 0.5, target: 0.5, strength: 0, targetStrength: 0 });
 
   const strands: Strand[] = useMemo(

@@ -12,7 +12,7 @@ export const programs: ProgramsContent = {
       title: "Free Group Workshops",
       audience: "Elementary, Middle, and High School",
       description:
-        "Open group sessions that cover the fundamentals — speaking with presence, structuring an argument, and thinking on your feet. No experience needed, and no cost.",
+        "Open group sessions that cover the fundamentals: speaking with presence, structuring an argument, and thinking on your feet. No experience needed, and no cost.",
       points: [
         "Open to Elementary, Middle, and High School students",
         "Taught by experienced competitors and state finalists",
@@ -33,7 +33,7 @@ export const programs: ProgramsContent = {
       title: "Private Lessons",
       audience: "Individually paced coaching",
       description:
-        "One-on-one coaching built around a single student — their event, their cases, their delivery. Fee-based, and the first session is always free.",
+        "One-on-one coaching built around a single student: their event, their cases, their delivery. Fee-based, and the first session is always free.",
       points: [
         "One-on-one sessions matched to your event",
         "First session free, no commitment",

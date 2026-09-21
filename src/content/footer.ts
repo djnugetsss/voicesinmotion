@@ -2,9 +2,8 @@ import type { FooterContent } from "./types";
 import { siteMeta } from "./site";
 
 /* ---------------------------------------------------------------------------
- * The email below is a guess at the pattern for this domain and is marked
- * `placeholder: true`. Replace it with the real address, or set `email` to
- * `null` to drop the line entirely and leave Instagram as the only contact.
+ * Set `email` to `null` to drop the contact line entirely and leave Instagram
+ * as the only way to get in touch.
  * ------------------------------------------------------------------------- */
 
 export const footer: FooterContent = {
@@ -19,7 +18,7 @@ export const footer: FooterContent = {
     { label: "Media", href: "/media", kind: "route" },
   ],
   contactTitle: "Get in touch",
-  email: { address: "hello@voicesinmotion.net", placeholder: true },
+  email: { address: "speechanddebateworkshop@gmail.com", placeholder: false },
   contactNote: "Questions about a workshop or a lesson? Send a note or a DM.",
   copyright: `© ${new Date().getFullYear()} ${siteMeta.name}. All rights reserved.`,
 };

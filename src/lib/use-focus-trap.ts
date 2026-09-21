@@ -15,7 +15,7 @@ const FOCUSABLE = [
  * Keeps Tab inside an open dialog, in both directions.
  *
  * Listens on the document in the capture phase rather than on the panel, so
- * it still works when focus has somehow landed outside — it pulls focus back
+ * it still works when focus has somehow landed outside: it pulls focus back
  * in rather than letting it walk off into the content behind the overlay.
  */
 export function useFocusTrap(

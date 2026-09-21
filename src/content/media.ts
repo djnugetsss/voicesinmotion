@@ -5,7 +5,7 @@ import type { MediaContent } from "./types";
  *
  * All twelve entries have `src: null` and `placeholder: true`, so they render
  * as palette gradients in boxes already reserved at their `aspect`. The whole
- * layout — masonry balance, filters, lightbox, keyboard navigation — is
+ * layout (masonry balance, filters, lightbox, keyboard navigation) is
  * testable exactly as it will behave with real files.
  *
  * To add a real one: drop the file in `public/media/`, set `src`, write a real

@@ -1,6 +1,6 @@
 # Voices In Motion
 
-Marketing site for Voices In Motion — speech & debate coaching for Elementary,
+Marketing site for Voices In Motion: speech & debate coaching for Elementary,
 Middle, and High School students.
 
 Next.js (App Router) · TypeScript · Tailwind CSS v4 · Motion (Framer Motion) · Lenis
@@ -55,7 +55,7 @@ document.querySelectorAll('[data-placeholder]')
 ```
 
 Currently placeholder: the three stat numbers, the summer price, all six
-coaches, every gallery item, the `/about` story prose, and the footer email.
+coaches, every gallery item, and the `/about` story prose.
 
 ---
 
@@ -63,7 +63,7 @@ coaches, every gallery item, the `/about` story prose, and the footer email.
 
 ### Add a review
 
-`src/content/reviews.ts` — append to `reviews`:
+In `src/content/reviews.ts`, append to `reviews`:
 
 ```ts
 {
@@ -81,7 +81,7 @@ twenty. Only add reviews people actually wrote.
 
 ### Add a coach
 
-`src/content/coaches.ts` — append to `coaches`:
+In `src/content/coaches.ts`, append to `coaches`:
 
 ```ts
 {
@@ -97,7 +97,7 @@ twenty. Only add reviews people actually wrote.
 ```
 
 For the photo: drop the file in `public/coaches/` and set `photo`. Leave
-`photo: null` and you get a palette gradient in the same 4:5 box — swapping
+`photo: null` and you get a palette gradient in the same 4:5 box, so swapping
 one in shifts nothing on the page.
 
 The home page shows the **first four**; `/about` shows the whole roster. To
@@ -106,7 +106,7 @@ change how many the home page features, edit the `.slice(0, 4)` in
 
 ### Add a media item
 
-`src/content/media.ts` — append to `items`:
+In `src/content/media.ts`, append to `items`:
 
 ```ts
 {
@@ -115,7 +115,7 @@ change how many the home page features, edit the `.slice(0, 4)` in
   src: "/media/awards.jpg",   // null renders a gradient placeholder
   alt: "Students on stage at the awards ceremony",
   caption: "Awards ceremony",
-  aspect: 1.5,                // width ÷ height — see below
+  aspect: 1.5,                // width ÷ height, see below
   category: "competitions",   // workshops | competitions | team
   placeholder: false,
 }
@@ -123,7 +123,7 @@ change how many the home page features, edit the `.slice(0, 4)` in
 
 **`aspect` must match the real file** (width ÷ height): `1` square, `0.8` for
 4:5 portrait, `1.5` for 3:2 landscape, `0.5625` for 9:16 vertical video. It is
-what reserves the box before the file loads — the masonry has zero layout
+what reserves the box before the file loads. The masonry has zero layout
 shift because of it, and a wrong number gives you a wrong-shaped crop.
 
 Files go in `public/media/`. The masonry rebalances itself and the filters pick
@@ -144,7 +144,7 @@ price: { label: "Price", value: "TBA", placeholder: true }
 ```
 
 Set `value: "$150"` and `placeholder: false`. The badge is styled from this one
-object — no component changes. `kind: "paid"` is what gives a session the gold
+object. No component changes. `kind: "paid"` is what gives a session the gold
 treatment and shows the price badge.
 
 Adding a fourth session just works: the timeline measures the track and
@@ -162,9 +162,9 @@ lengthens the scroll accordingly.
 | `--color-mist` `#EDF2FA` | Section washes |
 | `--color-sky` `#A8C0E0` | Decoration, gradients |
 | `--color-azure` `#5C87C4` | Fills, strokes, borders, the waveform |
-| `--color-azure-ink` `#456797` | **Azure for text.** Plain azure is only 3.57:1 on paper — too low for small text. Use this for any azure-coloured words. |
+| `--color-azure-ink` `#456797` | **Azure for text.** Plain azure is only 3.57:1 on paper, too low for small text. Use this for any azure-coloured words. |
 | `--color-ink` `#101B2E` | Body text |
-| `--color-gold` `#D9A441` | Sparingly — the closing CTA, the price badge |
+| `--color-gold` `#D9A441` | Sparingly: the closing CTA, the price badge |
 
 Ink below 65% opacity drops under 4.5:1 on light backgrounds. `text-ink/65` is
 the floor for small text.
@@ -175,14 +175,14 @@ the floor for small text.
 
 `src/components/motion/` holds the primitives everything else is built from:
 
-- `RevealWords` — word-by-word headline reveal. Three modes: on-scroll trigger,
+- `RevealWords`: word-by-word headline reveal. Three modes: on-scroll trigger,
   scroll-scrubbed (`progress`), and `eager` (CSS-driven, for above-the-fold
   headings so they paint without waiting on hydration).
-- `RevealBlock` — fade + rise. Also takes `eager`.
-- `Parallax`, `Spotlight`, `Tilt` — scroll and pointer effects.
-- `Waveform` (in `ui/`) — the signature sine. Reused as the hero element, the
+- `RevealBlock`: fade + rise. Also takes `eager`.
+- `Parallax`, `Spotlight`, `Tilt`: scroll and pointer effects.
+- `Waveform` (in `ui/`): the signature sine. Reused as the hero element, the
   timeline connector, the closing-band backdrop and the footer divider.
-- `use-media-preference.ts` — the reduced-motion and pointer guards.
+- `use-media-preference.ts`: the reduced-motion and pointer guards.
 
 **Every primitive degrades to a static, complete state under
 `prefers-reduced-motion`,** and the pinned sections un-pin entirely (they use

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: about.hero.subhead,
   alternates: { canonical: "/about" },
   openGraph: {
-    title: `About — ${siteMeta.name}`,
+    title: `About: ${siteMeta.name}`,
     description: about.hero.subhead,
     url: `${siteMeta.url}/about`,
     type: "profile",

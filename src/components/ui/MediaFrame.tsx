@@ -22,7 +22,7 @@ export type MediaFrameProps = {
   alt: string;
   /** Width ÷ height. Reserves the box before anything loads. */
   aspect: number;
-  /** Required whenever `src` is set — next/image needs it to pick a source. */
+  /** Required whenever `src` is set: next/image needs it to pick a source. */
   sizes?: string;
   seed?: number;
   priority?: boolean;

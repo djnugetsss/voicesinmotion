@@ -29,7 +29,7 @@ export function ReviewsSection() {
     The loop translates -50%, so one half of the track has to be at least as
     wide as the viewport or a gap opens up at the seam. How many repeats that
     takes depends on the card width and the screen, so it is measured rather
-    than assumed — a fixed count left a visible gap at 1920 and wider.
+    than assumed: a fixed count left a visible gap at 1920 and wider.
   */
   useIsomorphicLayoutEffect(() => {
     const host = trackRef.current;
@@ -87,7 +87,7 @@ export function ReviewsSection() {
       {reduced ? (
         // Static grid: no marquee, no parallax, nothing moving.
         <div className="shell mt-12 sm:mt-16">
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid grid-cols-[repeat(auto-fit,minmax(17rem,1fr))] gap-5">
             {list.map((review) => (
               <li key={review.id}>
                 <ReviewCard review={review} />

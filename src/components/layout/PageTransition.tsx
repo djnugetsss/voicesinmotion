@@ -11,7 +11,7 @@ const CONTENT_MS = 340;
 /**
  * Route transition: the incoming page fades and lifts while a blue wash sweeps
  * across. The whole thing is done inside half a second, and it never runs on
- * the first paint — only on client-side navigations.
+ * the first paint, only on client-side navigations.
  *
  * Nothing animates under `prefers-reduced-motion`; the children are returned
  * untouched, with no wrapper transform at all.
@@ -21,7 +21,7 @@ export function PageTransition({ children }: { children: ReactNode }) {
   const reduced = usePrefersReducedMotion();
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // Adjusting state during render — React's sanctioned "derive from changed
+  // Adjusting state during render: React's sanctioned "derive from changed
   // props" pattern. It re-renders before committing, so `navigations` is
   // already correct in the same commit that mounts the new page. Deferring
   // this to an effect would let the page mount before we knew to animate it.

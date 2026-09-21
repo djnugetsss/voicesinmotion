@@ -80,8 +80,8 @@ export function CoachCard({
             }
             className={cn(
               "object-cover transition-[filter,scale] duration-700 ease-out",
-              // Desaturate only where there is a pointer that can undo it —
-              // on touch, the photo is simply in colour.
+              // Desaturate only where there is a pointer that can undo it.
+              // On touch, the photo is simply in colour.
               "[@media(hover:hover)]:grayscale group-hover:grayscale-0",
               "motion-safe:group-hover:scale-[1.03]",
             )}

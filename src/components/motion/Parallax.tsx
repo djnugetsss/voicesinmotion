@@ -21,8 +21,8 @@ export type ParallaxProps = {
 };
 
 /**
- * Translates its child on scroll at a configurable rate. Inert — renders a
- * plain wrapper — when reduced motion is requested.
+ * Translates its child on scroll at a configurable rate. Inert when reduced
+ * motion is requested, rendering a plain wrapper.
  */
 export function Parallax({
   children,

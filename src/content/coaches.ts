@@ -5,7 +5,7 @@ import type { CoachesContent } from "./types";
  *
  * All four people below are invented, with deliberately fake surnames, and are
  * marked `placeholder: true` (which surfaces as `data-placeholder` in the DOM).
- * Their achievements are filler too — replace every field before this goes
+ * Their achievements are filler too. Replace every field before this goes
  * live.
  *
  * To add a photo: set `photo` to `{ src: "/coaches/name.jpg", alt: "..." }`
@@ -18,7 +18,7 @@ export const coaches: CoachesContent = {
   eyebrow: "The coaches",
   title: "Taught by people who competed.",
   intro:
-    "Every coach has stood at the podium themselves — recently enough to remember exactly what it asks of you.",
+    "Every coach has stood at the podium themselves, recently enough to remember exactly what it asks of you.",
   coaches: [
     {
       id: "coach-1",
@@ -71,7 +71,7 @@ export const coaches: CoachesContent = {
       events: "Declamation · Impromptu",
       achievements: ["Regional Finalist", "2× Tournament Finalist"],
       bio:
-        "Placeholder bio. Works with newer speakers on the first month of the event — picking a piece, getting through it once, and building the habit of speaking out loud on purpose.",
+        "Placeholder bio. Works with newer speakers on the first month of the event: picking a piece, getting through it once, and building the habit of speaking out loud on purpose.",
       photo: null,
       placeholder: true,
     },

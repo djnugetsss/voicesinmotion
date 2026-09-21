@@ -24,8 +24,8 @@ const bodySans = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteMeta.url),
   title: {
-    default: `${siteMeta.name} — ${siteMeta.tagline}`,
-    template: `%s — ${siteMeta.name}`,
+    default: `${siteMeta.name}: ${siteMeta.tagline}`,
+    template: `%s: ${siteMeta.name}`,
   },
   description: siteMeta.description,
   alternates: { canonical: "/" },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     "summer speech camp",
   ],
   openGraph: {
-    title: `${siteMeta.name} — ${siteMeta.tagline}`,
+    title: `${siteMeta.name}: ${siteMeta.tagline}`,
     description: siteMeta.description,
     url: siteMeta.url,
     siteName: siteMeta.name,
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteMeta.name} — ${siteMeta.tagline}`,
+    title: `${siteMeta.name}: ${siteMeta.tagline}`,
     description: siteMeta.description,
   },
   robots: {

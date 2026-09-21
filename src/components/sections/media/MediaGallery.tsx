@@ -40,7 +40,7 @@ export function MediaGallery() {
   const [everOpened, setEverOpened] = useState(false);
 
   // Measured in a layout effect so the correct column count is in place
-  // before the browser paints — no flash of the single-column fallback.
+  // before the browser paints: no flash of the single-column fallback.
   useIsomorphicLayoutEffect(() => {
     const element = containerRef.current;
     if (!element) return;

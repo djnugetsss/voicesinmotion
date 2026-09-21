@@ -31,15 +31,15 @@ function useMediaQuery(query: string, serverValue: boolean): boolean {
  *
  * Returns `true` when the visitor has asked for reduced motion. Defaults to
  * `false` on the server so the markup matches the common case, then corrects
- * itself on the first client commit — before any animation is allowed to run.
+ * itself on the first client commit, before any animation is allowed to run.
  */
 export function usePrefersReducedMotion(): boolean {
   return useMediaQuery("(prefers-reduced-motion: reduce)", false);
 }
 
 /**
- * True only for precise pointers (mouse / trackpad). Cursor-driven effects —
- * <Spotlight>, the waveform bulge — are gated on this so touch devices never
+ * True only for precise pointers (mouse / trackpad). Cursor-driven effects
+ * (<Spotlight>, the waveform bulge) are gated on this so touch devices never
  * pay for work they cannot trigger.
  */
 export function usePointerFine(): boolean {

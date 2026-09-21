@@ -113,10 +113,12 @@ export type SummerContent = {
 
 export type Review = {
   id: string;
+  /** Verbatim, exactly as the reviewer wrote it. Never edited for grammar. */
   quote: string;
   name: string;
-  role: string;
-  session: string;
+  /** Both optional: plenty of reviews arrive with just a name. */
+  role?: string;
+  session?: string;
 };
 
 export type ReviewsContent = {
@@ -138,7 +140,7 @@ export type Coach = {
   bio: string;
   /**
    * Portrait, rendered in a 4:5 box. Leave `null` for the gradient
-   * placeholder — drop in `{ src, alt }` and the image takes over with no
+   * placeholder. Drop in `{ src, alt }` and the image takes over with no
    * other change.
    */
   photo: { src: string; alt: string } | null;
@@ -167,14 +169,14 @@ export type FooterContent = {
   linksTitle: string;
   links: NavLink[];
   contactTitle: string;
-  /** Replace or remove before launch — see the note in `footer.ts`. */
+  /** Replace or remove before launch. See the note in `footer.ts`. */
   email: { address: string; placeholder: boolean } | null;
   contactNote: string;
   copyright: string;
 };
 
 /**
- * A picture or clip slot. `src` stays `null` until a real file exists — the
+ * A picture or clip slot. `src` stays `null` until a real file exists. The
  * UI renders a palette gradient in the reserved box instead, so every layout
  * is testable before any asset lands.
  *

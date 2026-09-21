@@ -15,9 +15,9 @@ import { usePrefersReducedMotion } from "./use-media-preference";
 export type RevealWordsProps = {
   /** The line to deliver. Split on whitespace; punctuation stays with its word. */
   text: string;
-  /** Element to render. One `h1` per page — pass it explicitly. */
+  /** Element to render. One `h1` per page, so pass it explicitly. */
   as?: ElementType;
-  /** Forwarded to the rendered element — anchor targets, aria-labelledby. */
+  /** Forwarded to the rendered element: anchor targets, aria-labelledby. */
   id?: string;
   className?: string;
   /** Per-word class, handy for accenting a single word later. */
@@ -36,14 +36,14 @@ export type RevealWordsProps = {
   /**
    * Above-the-fold treatment: the entrance runs from CSS instead of Framer,
    * so it paints as soon as the stylesheet lands rather than waiting on
-   * hydration — and still reads correctly with no JS at all. Use it for any
+   * hydration, and still reads correctly with no JS at all. Use it for any
    * heading that is visible on first paint; leave it off for anything that
    * should wait to be scrolled to.
    */
   eager?: boolean;
   /**
    * Scrub mode. Pass a 0–1 scroll progress value and the line assembles in
-   * step with the scroll instead of firing once on view — the reader delivers
+   * step with the scroll instead of firing once on view: the reader delivers
    * the line themselves. Ignored under `prefers-reduced-motion`.
    */
   progress?: MotionValue<number>;

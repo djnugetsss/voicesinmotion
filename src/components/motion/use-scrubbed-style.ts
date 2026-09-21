@@ -8,13 +8,13 @@ import { useEffect, useRef } from "react";
  *
  * Handing `useTransform` output straight to a `style` prop proved unreliable
  * here for scroll-linked values: once a derived value clamped at the end of
- * its range, the element stopped tracking it and drifted — the hero's scroll
+ * its range, the element stopped tracking it and drifted: the hero's scroll
  * cue faded correctly and then came back, and the scrubbed quote froze
  * part-delivered. Subscribing once and writing the styles ourselves is
  * predictable, and it is one subscription instead of a chain of derived
  * values per element.
  *
- * `apply` must be stable — wrap it in `useCallback`.
+ * `apply` must be stable, so wrap it in `useCallback`.
  */
 export function useScrubbedStyle<T extends HTMLElement>(
   progress: MotionValue<number>,

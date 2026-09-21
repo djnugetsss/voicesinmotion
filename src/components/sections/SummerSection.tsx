@@ -109,7 +109,7 @@ export function SummerSection() {
   const count = summer.sessions.length;
 
   // The first card is already on screen when the pin engages, so its window
-  // sits entirely before progress 0 — it is locked from the first frame.
+  // sits entirely before progress 0. It is locked from the first frame.
   const cardRange = (i: number): [number, number] =>
     i === 0 ? [-0.2, -0.1] : [i / count - 0.12, i / count + 0.06];
 
