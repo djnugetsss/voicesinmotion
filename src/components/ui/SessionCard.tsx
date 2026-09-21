@@ -62,7 +62,7 @@ export function SessionCard({
       />
 
       <div className="flex items-center justify-between gap-4">
-        <span className="font-display text-[1.75rem] leading-none text-azure">
+        <span className="font-display text-[1.75rem] leading-none text-azure-ink">
           {session.marker}
         </span>
         <span
@@ -70,7 +70,7 @@ export function SessionCard({
             "rounded-full border px-3 py-1 text-[0.6875rem] font-medium tracking-[0.14em] uppercase",
             isPaid
               ? "border-gold/50 text-ink/70"
-              : "border-azure/40 text-azure",
+              : "border-azure/40 text-azure-ink",
           )}
         >
           {isPaid ? "Paid" : "Free"}
@@ -89,7 +89,7 @@ export function SessionCard({
       </p>
 
       {session.description ? (
-        <p className="mt-5 max-w-[34ch] text-[0.9375rem] leading-[1.55] text-ink/60">
+        <p className="mt-5 max-w-[34ch] text-[0.9375rem] leading-[1.55] text-ink/65">
           {session.description}
         </p>
       ) : null}

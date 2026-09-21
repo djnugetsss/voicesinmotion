@@ -3,6 +3,7 @@ import { Instrument_Serif, Inter } from "next/font/google";
 import { SmoothScroll } from "@/components/motion";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { StructuredData } from "@/components/layout/StructuredData";
 import { SiteHeader } from "@/components/nav/SiteHeader";
 import { siteMeta } from "@/content";
 import "./globals.css";
@@ -27,12 +28,32 @@ export const metadata: Metadata = {
     template: `%s — ${siteMeta.name}`,
   },
   description: siteMeta.description,
+  alternates: { canonical: "/" },
+  applicationName: siteMeta.name,
+  keywords: [
+    "speech and debate",
+    "public speaking coaching",
+    "debate coach",
+    "student speech workshops",
+    "summer speech camp",
+  ],
   openGraph: {
     title: `${siteMeta.name} — ${siteMeta.tagline}`,
     description: siteMeta.description,
     url: siteMeta.url,
     siteName: siteMeta.name,
+    locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteMeta.name} — ${siteMeta.tagline}`,
+    description: siteMeta.description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
 };
 
@@ -47,6 +68,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${displaySerif.variable} ${bodySans.variable}`}>
       <body className="antialiased">
+        <StructuredData />
         <SmoothScroll />
         <SiteHeader />
         <main id="main">

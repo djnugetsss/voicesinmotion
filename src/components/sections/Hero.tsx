@@ -57,8 +57,8 @@ export function Hero() {
       {/* ---- Content ---- */}
       <div className="shell relative">
         <div className="max-w-[min(100%,52rem)]">
-          <RevealBlock direction="up" distance={14} duration={0.7}>
-            <p className="flex items-center gap-2.5 text-[length:var(--text-eyebrow)] font-medium tracking-[0.2em] text-ink/55 uppercase">
+          <RevealBlock eager distance={14} duration={0.7}>
+            <p className="flex items-center gap-2.5 text-[length:var(--text-eyebrow)] font-medium tracking-[0.2em] text-ink/65 uppercase">
               <span
                 aria-hidden="true"
                 className="inline-block size-1.5 shrink-0 rounded-full bg-gold"
@@ -68,6 +68,7 @@ export function Hero() {
           </RevealBlock>
 
           <RevealWords
+            eager
             as="h1"
             id="hero-heading"
             text={hero.headline}
@@ -79,13 +80,13 @@ export function Hero() {
             blur={12}
           />
 
-          <RevealBlock direction="up" delay={0.42} distance={20}>
+          <RevealBlock eager delay={0.3} distance={20}>
             <p className="mt-6 max-w-[46ch] text-[length:var(--text-lead)] leading-[1.6] text-ink/70 sm:mt-8">
               {hero.subhead}
             </p>
           </RevealBlock>
 
-          <RevealBlock direction="up" delay={0.56} distance={20}>
+          <RevealBlock eager delay={0.44} distance={20}>
             <div className="mt-9 flex flex-col gap-3 sm:mt-11 sm:flex-row sm:items-center sm:gap-4">
               <ActionLink
                 href={hero.primaryCta.href}

@@ -35,7 +35,7 @@ export function MissionSection() {
                   "linear-gradient(160deg, color-mix(in oklab, var(--paper) 92%, transparent) 0%, color-mix(in oklab, var(--sky) 20%, transparent) 100%)",
               }}
             >
-              <PillarGlyph name={pillar.icon} className="size-9 text-azure" />
+              <PillarGlyph name={pillar.icon} className="size-9 text-azure-ink" />
               <h3 className="font-display mt-7 text-[1.625rem] leading-none text-ink">
                 {pillar.title}
               </h3>

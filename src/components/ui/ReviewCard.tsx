@@ -39,7 +39,7 @@ export function ReviewCard({
         <span className="font-display text-[1.25rem] leading-none text-ink">
           {review.name}
         </span>
-        <span className="text-[0.875rem] text-ink/55">
+        <span className="text-[0.875rem] text-ink/65">
           {review.role} · {review.session}
         </span>
       </figcaption>

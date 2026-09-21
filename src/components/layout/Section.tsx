@@ -44,14 +44,14 @@ function SectionWash({ tone }: { tone: Exclude<SectionTone, "none"> }) {
           }}
         />
         <div
-          className="drift-a absolute -top-[28%] left-[-15%] h-[85vh] w-[85vw] rounded-full blur-[70px]"
+          className="drift-a absolute -top-[28%] left-[-15%] h-[85vh] w-[85vw] rounded-full blur-[48px]"
           style={{
             backgroundImage:
               "radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--sky) 62%, transparent) 0%, transparent 68%)",
           }}
         />
         <div
-          className="drift-b absolute -right-[20%] bottom-[-25%] h-[80vh] w-[80vw] rounded-full blur-[80px]"
+          className="drift-b absolute -right-[20%] bottom-[-25%] h-[80vh] w-[80vw] rounded-full blur-[52px]"
           style={{
             backgroundImage:
               "radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--azure) 30%, transparent) 0%, transparent 66%)",
@@ -77,7 +77,7 @@ function SectionWash({ tone }: { tone: Exclude<SectionTone, "none"> }) {
       <div className="absolute inset-0" style={{ backgroundImage: washes[tone] }} />
       {tone === "mist" ? (
         <div
-          className="drift-b absolute top-[10%] -left-[18%] h-[70vh] w-[70vw] rounded-full blur-[90px]"
+          className="drift-b absolute top-[10%] -left-[18%] h-[70vh] w-[70vw] rounded-full blur-[56px]"
           style={{
             backgroundImage:
               "radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--sky) 38%, transparent) 0%, transparent 70%)",
@@ -86,7 +86,7 @@ function SectionWash({ tone }: { tone: Exclude<SectionTone, "none"> }) {
       ) : null}
       {tone === "sky" ? (
         <div
-          className="drift-a absolute -top-[12%] right-[-15%] h-[65vh] w-[65vw] rounded-full blur-[90px]"
+          className="drift-a absolute -top-[12%] right-[-15%] h-[65vh] w-[65vw] rounded-full blur-[56px]"
           style={{
             backgroundImage:
               "radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--azure) 26%, transparent) 0%, transparent 70%)",
@@ -168,7 +168,7 @@ export function SectionEyebrow({
       id={id}
       className={cn(
         "flex items-center gap-2.5 text-[length:var(--text-eyebrow)] font-medium tracking-[0.2em] uppercase",
-        className ?? "text-ink/55",
+        className ?? "text-ink/65",
       )}
     >
       <span

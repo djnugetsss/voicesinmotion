@@ -40,8 +40,8 @@ export function CoachCard({
       >
         {coach.name}
       </h3>
-      <p className="mt-2.5 text-[0.875rem] text-azure">{coach.role}</p>
-      <p className="mt-1 text-[0.875rem] text-ink/55">{coach.events}</p>
+      <p className="mt-2.5 text-[0.875rem] text-azure-ink">{coach.role}</p>
+      <p className="mt-1 text-[0.875rem] text-ink/65">{coach.events}</p>
     </>
   );
 
@@ -109,7 +109,7 @@ export function CoachCard({
             className="rounded-lg text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-azure"
           >
             {identity}
-            <span className="mt-4 inline-flex items-center gap-2 text-[0.8125rem] font-medium text-azure">
+            <span className="mt-4 inline-flex items-center gap-2 text-[0.8125rem] font-medium text-azure-ink">
               {expanded ? "Close" : "Read more"}
               <motion.span
                 aria-hidden="true"
@@ -126,6 +126,7 @@ export function CoachCard({
                   strokeWidth="1.7"
                   strokeLinecap="round"
                   strokeLinejoin="round"
+                  aria-hidden="true"
                 >
                   <path d="M3 6l5 5 5-5" />
                 </svg>

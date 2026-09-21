@@ -10,7 +10,7 @@ export function PlayBadge({ className }: { className?: string }) {
         className,
       )}
     >
-      <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor">
+      <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true">
         <path d="M5 3.4v9.2a.6.6 0 0 0 .92.5l7.2-4.6a.6.6 0 0 0 0-1l-7.2-4.6A.6.6 0 0 0 5 3.4Z" />
       </svg>
     </span>

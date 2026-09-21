@@ -12,7 +12,10 @@ import {
 const VIEW_W = 1000;
 const VIEW_H = 400;
 const MID = VIEW_H / 2;
-const SAMPLES = 180;
+/* 140 samples across a 1000-unit viewBox is ~7 units per segment — below the
+   threshold where faceting is visible on a sine, and ~25% less string building
+   per frame than 180. */
+const SAMPLES = 140;
 
 export type WaveformProps = {
   /** Resting amplitude as a fraction of half the band height (0–1). */

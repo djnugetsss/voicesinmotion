@@ -9,6 +9,16 @@
   --color-mist: #edf2fa;
   --color-sky: #a8c0e0;
   --color-azure: #5c87c4;
+  /*
+    The same azure, darkened 30% toward ink. Not a new brand colour — it is
+    what azure has to be for small text to clear 4.5:1 everywhere it lands:
+    paper 5.64, mist 5.15, and 4.56 on the darkest corner of a card gradient
+    (sky 26% over mist), which is the worst bed on the site.
+
+    Plain --azure stays for fills, strokes, borders and the waveform, where
+    only the 3:1 non-text threshold applies.
+  */
+  --color-azure-ink: #456797;
   --color-ink: #101b2e;
   --color-gold: #d9a441;
 
@@ -32,6 +42,7 @@
   --mist: var(--color-mist);
   --sky: var(--color-sky);
   --azure: var(--color-azure);
+  --azure-ink: var(--color-azure-ink);
   --ink: var(--color-ink);
   --gold: var(--color-gold);
 
@@ -166,20 +177,53 @@ main {
    Ambient gradient drift — transform + opacity only
    ------------------------------------------------------------------ */
 
+/*
+  Translate and opacity only — deliberately no `scale`. These layers carry a
+  70–80px blur, and scaling a blurred layer forces the blur to re-rasterize
+  every frame rather than being rasterized once and composited. Dropping the
+  scale is what takes the hero from dropped frames to a steady 60.
+*/
 @keyframes drift-a {
-  0%   { transform: translate3d(-6%, -4%, 0) scale(1.05); opacity: 0.85; }
-  50%  { transform: translate3d(6%, 5%, 0) scale(1.22);   opacity: 1; }
-  100% { transform: translate3d(-6%, -4%, 0) scale(1.05); opacity: 0.85; }
+  0%   { transform: translate3d(-6%, -4%, 0); opacity: 0.85; }
+  50%  { transform: translate3d(6%, 5%, 0);   opacity: 1; }
+  100% { transform: translate3d(-6%, -4%, 0); opacity: 0.85; }
 }
 
 @keyframes drift-b {
-  0%   { transform: translate3d(5%, 6%, 0) scale(1.18);   opacity: 0.7; }
-  50%  { transform: translate3d(-7%, -3%, 0) scale(1);    opacity: 0.95; }
-  100% { transform: translate3d(5%, 6%, 0) scale(1.18);   opacity: 0.7; }
+  0%   { transform: translate3d(5%, 6%, 0);   opacity: 0.7; }
+  50%  { transform: translate3d(-7%, -3%, 0); opacity: 0.95; }
+  100% { transform: translate3d(5%, 6%, 0);   opacity: 0.7; }
 }
 
 .drift-a { animation: drift-a 46s var(--ease-stage) infinite; }
 .drift-b { animation: drift-b 62s var(--ease-stage) infinite; }
+
+/* ------------------------------------------------------------------
+   Eager entrance — CSS, not JS.
+
+   Above-the-fold reveals run from the stylesheet so they paint as soon as
+   CSS arrives instead of waiting for React to hydrate and Framer to set
+   opacity. That is what moves the hero's LCP element, and it means the
+   content is still readable if the JS never arrives at all. `both` fill
+   keeps the end state after the run.
+   ------------------------------------------------------------------ */
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--word-rise, 24px), 0);
+    filter: blur(var(--word-blur, 10px));
+  }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+.rise-in { animation: rise-in 0.72s var(--ease-stage) both; }
+.word-in { animation: word-in 0.9s var(--ease-stage) both; }
 
 /* ------------------------------------------------------------------
    Marquee — one linear translate, paused on hover or keyboard focus.
@@ -211,7 +255,11 @@ main {
   *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+    /* Delays too, or a staggered entrance still waits its turn before
+       snapping in — which reads as broken rather than as "no motion". */
+    animation-delay: 0ms !important;
     transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
 }

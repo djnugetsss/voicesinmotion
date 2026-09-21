@@ -26,7 +26,7 @@ export function ScrollCue({
 
   return (
     <div ref={ref} className="flex items-center gap-3" aria-hidden="true">
-      <span className="text-[0.6875rem] tracking-[0.22em] text-ink/45 uppercase">
+      <span className="text-[0.6875rem] tracking-[0.22em] text-ink/65 uppercase">
         {label}
       </span>
       <span className="relative block h-px w-12 overflow-hidden bg-ink/12">

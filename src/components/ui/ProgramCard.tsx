@@ -50,7 +50,7 @@ export function ProgramCard({ program }: { program: Program }) {
           style={{ backgroundImage: hovered[program.tone] }}
         />
 
-        <p className="text-[0.75rem] font-medium tracking-[0.18em] text-azure uppercase">
+        <p className="text-[0.75rem] font-medium tracking-[0.18em] text-azure-ink uppercase">
           {program.kicker}
         </p>
 
@@ -61,7 +61,7 @@ export function ProgramCard({ program }: { program: Program }) {
           {program.title}
         </h3>
 
-        <p className="mt-3 text-[0.9375rem] text-ink/55">{program.audience}</p>
+        <p className="mt-3 text-[0.9375rem] text-ink/65">{program.audience}</p>
 
         <p className="mt-5 max-w-[44ch] text-[length:var(--text-lead)] leading-[1.6] text-ink/70">
           {program.description}

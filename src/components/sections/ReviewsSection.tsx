@@ -1,6 +1,8 @@
 "use client";
 
+import { useRef, useState } from "react";
 import { Parallax, RevealBlock, RevealWords, usePrefersReducedMotion } from "@/components/motion";
+import { useIsomorphicLayoutEffect } from "@/lib/use-isomorphic-layout-effect";
 import { Section, SectionEyebrow } from "@/components/layout/Section";
 import { ReviewCard } from "@/components/ui/ReviewCard";
 import { reviews } from "@/content";
@@ -20,9 +22,34 @@ export function ReviewsSection() {
   const reduced = usePrefersReducedMotion();
   const list = reviews.reviews;
 
-  // One "copy" has to be at least as wide as the viewport or the loop shows a
-  // gap, so short lists get repeated before the track is doubled.
-  const copies = Math.max(1, Math.ceil(4 / Math.max(list.length, 1)));
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [copies, setCopies] = useState(2);
+
+  /*
+    The loop translates -50%, so one half of the track has to be at least as
+    wide as the viewport or a gap opens up at the seam. How many repeats that
+    takes depends on the card width and the screen, so it is measured rather
+    than assumed — a fixed count left a visible gap at 1920 and wider.
+  */
+  useIsomorphicLayoutEffect(() => {
+    const host = trackRef.current;
+    if (!host || reduced) return;
+
+    const compute = () => {
+      const card = host.querySelector<HTMLElement>("[data-review-card]");
+      if (!card) return;
+      const unit = card.getBoundingClientRect().width + 20; // gap-5
+      const onePass = unit * Math.max(list.length, 1);
+      if (onePass <= 0) return;
+      setCopies(Math.max(2, Math.ceil(host.clientWidth / onePass) + 1));
+    };
+
+    compute();
+    const observer = new ResizeObserver(compute);
+    observer.observe(host);
+    return () => observer.disconnect();
+  }, [list.length, reduced]);
+
   const base = Array.from({ length: copies }, () => list).flat();
   const duration = base.length * SECONDS_PER_CARD;
 
@@ -70,6 +97,7 @@ export function ReviewsSection() {
         </div>
       ) : (
         <div
+          ref={trackRef}
           className="marquee group relative mt-12 overflow-hidden py-10 sm:mt-16"
           style={{
             // Fade the ends rather than painting a gradient over them, so the
@@ -94,6 +122,7 @@ export function ReviewsSection() {
                     className="w-[78vw] shrink-0 sm:w-[22rem] lg:w-[24rem]"
                   >
                     <div
+                      data-review-card
                       style={{ transform: `translateY(${lane.offset}px)` }}
                       // The second pass is decoration; one copy is enough for
                       // anyone reading the page with a screen reader.

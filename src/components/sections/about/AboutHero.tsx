@@ -11,11 +11,12 @@ export function AboutHero() {
       labelledBy="about-heading"
       className="pt-[calc(var(--header-h)+4.5rem)] pb-20 sm:pt-[calc(var(--header-h)+6rem)] sm:pb-24 lg:pb-28"
     >
-      <RevealBlock>
+      <RevealBlock eager>
         <SectionEyebrow>{about.hero.eyebrow}</SectionEyebrow>
       </RevealBlock>
 
       <RevealWords
+        eager
         as="h1"
         id="about-heading"
         text={about.hero.headline}
@@ -24,7 +25,7 @@ export function AboutHero() {
         distance={24}
       />
 
-      <RevealBlock delay={0.24}>
+      <RevealBlock eager delay={0.24}>
         <p className="mt-6 max-w-[52ch] text-[length:var(--text-lead)] leading-[1.6] text-ink/70">
           {about.hero.subhead}
         </p>

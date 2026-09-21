@@ -6,10 +6,9 @@ import { useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { lockScroll, unlockScroll, usePrefersReducedMotion } from "@/components/motion";
 import { placeholderGradient } from "@/components/ui/MediaFrame";
+import { useFocusTrap } from "@/lib/use-focus-trap";
 import { PlayBadge } from "./PlayBadge";
 import type { MediaItem } from "@/content";
-
-const FOCUSABLE = 'button, [href], input, [tabindex]:not([tabindex="-1"])';
 
 export function MediaLightbox({
   item,
@@ -37,6 +36,8 @@ export function MediaLightbox({
   const panelRef = useRef<HTMLDivElement>(null);
   const open = item !== null;
 
+  useFocusTrap(panelRef, open);
+
   useEffect(() => {
     if (!open) return;
     lockScroll();
@@ -60,22 +61,6 @@ export function MediaLightbox({
         event.preventDefault();
         onPrev();
         return;
-      }
-      if (event.key !== "Tab") return;
-
-      // Focus trap: keep Tab inside the dialog in both directions.
-      const nodes = panelRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE);
-      if (!nodes || nodes.length === 0) return;
-      const first = nodes[0];
-      const last = nodes[nodes.length - 1];
-      const active = document.activeElement;
-
-      if (event.shiftKey && (active === first || active === panelRef.current)) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && active === last) {
-        event.preventDefault();
-        first.focus();
       }
     },
     [onClose, onNext, onPrev],

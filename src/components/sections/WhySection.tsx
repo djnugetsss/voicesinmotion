@@ -43,7 +43,7 @@ function QuoteAttribution({
   );
 
   const className =
-    "mt-8 text-[0.8125rem] tracking-[0.18em] text-ink/55 uppercase sm:mt-10";
+    "mt-8 text-[0.8125rem] tracking-[0.18em] text-ink/65 uppercase sm:mt-10";
 
   if (!scrubbed) {
     return (
@@ -145,10 +145,10 @@ export function WhySection() {
                 <p className="font-display text-[length:var(--text-stat)] leading-none text-ink">
                   <CountUp value={stat.value} decimals={stat.decimals ?? 0} />
                   {stat.suffix ? (
-                    <span className="text-azure">{stat.suffix}</span>
+                    <span className="text-azure-ink">{stat.suffix}</span>
                   ) : null}
                 </p>
-                <p className="mt-4 max-w-[22ch] text-[0.9375rem] leading-[1.5] text-ink/60">
+                <p className="mt-4 max-w-[22ch] text-[0.9375rem] leading-[1.5] text-ink/65">
                   {stat.label}
                 </p>
               </div>

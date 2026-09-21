@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useInView } from "motion/react";
+import { cn } from "@/lib/cn";
 import { useRef, useState, type ReactNode } from "react";
 import { usePrefersReducedMotion } from "./use-media-preference";
 
@@ -19,6 +20,11 @@ export type RevealBlockProps = {
   /** Viewport margin for the trigger, e.g. "-20% 0px". */
   margin?: string;
   as?: "div" | "section" | "li" | "p" | "figure" | "article";
+  /**
+   * Above-the-fold treatment: entrance runs from CSS rather than Framer, so
+   * it paints without waiting for hydration and survives a JS failure.
+   */
+  eager?: boolean;
 };
 
 const offsets: Record<RevealDirection, { x: number; y: number }> = {
@@ -40,6 +46,7 @@ export function RevealBlock({
   once = true,
   margin = "-12% 0px -12% 0px",
   as = "div",
+  eager = false,
 }: RevealBlockProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = usePrefersReducedMotion();
@@ -53,6 +60,21 @@ export function RevealBlock({
   // one keeps the ref type from collapsing into an unusable intersection.
   const Tag = motion[as] as typeof motion.div;
   const dir = offsets[direction];
+
+  if (eager) {
+    const Plain = as;
+    return (
+      <Plain
+        className={cn("rise-in", className)}
+        style={{
+          animationDelay: `${delay.toFixed(3)}s`,
+          animationDuration: `${duration}s`,
+        }}
+      >
+        {children}
+      </Plain>
+    );
+  }
 
   return (
     <Tag

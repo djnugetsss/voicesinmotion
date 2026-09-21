@@ -6,9 +6,19 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "@/components/motion";
 import { placeholderGradient } from "@/components/ui/MediaFrame";
 import { useIsomorphicLayoutEffect } from "@/lib/use-isomorphic-layout-effect";
-import { MediaLightbox } from "./MediaLightbox";
+import dynamic from "next/dynamic";
 import { PlayBadge } from "./PlayBadge";
 import { media } from "@/content";
+
+/**
+ * The lightbox is only ever needed after a click, and it drags in Framer's
+ * shared-layout machinery plus the focus-trap logic. Kept out of the initial
+ * bundle and fetched on first open.
+ */
+const MediaLightbox = dynamic(
+  () => import("./MediaLightbox").then((m) => m.MediaLightbox),
+  { ssr: false },
+);
 import type { MediaItem } from "@/content";
 
 /** Seconds of delay added per column, so the reveal cascades sideways. */
@@ -27,6 +37,7 @@ export function MediaGallery() {
   const [filter, setFilter] = useState<string>("all");
   const [openId, setOpenId] = useState<string | null>(null);
   const [originId, setOriginId] = useState<string | null>(null);
+  const [everOpened, setEverOpened] = useState(false);
 
   // Measured in a layout effect so the correct column count is in place
   // before the browser paints — no flash of the single-column fallback.
@@ -121,7 +132,7 @@ export function MediaGallery() {
                   transition={{ duration: reduced ? 0 : 0.35, ease: [0.22, 1, 0.36, 1] }}
                 />
               ) : null}
-              <span className={active ? "text-paper" : "text-ink/60"}>
+              <span className={active ? "text-paper" : "text-ink/65"}>
                 {option.label}
               </span>
             </button>
@@ -170,6 +181,7 @@ export function MediaGallery() {
                         type="button"
                         data-tile={item.id}
                         onClick={() => {
+                          setEverOpened(true);
                           setOpenId(item.id);
                           setOriginId(item.id);
                         }}
@@ -193,7 +205,10 @@ export function MediaGallery() {
                           />
                         )}
 
-                        <span className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                        {/* Scrim and caption rest hidden only where there is
+                            a pointer to reveal them and motion is welcome.
+                            Otherwise they are simply always on. */}
+                        <span className="absolute inset-0 bg-gradient-to-t from-ink/65 via-ink/10 to-transparent transition-opacity duration-500 motion-safe:[@media(hover:hover)]:opacity-0 group-hover:opacity-100" />
 
                         {item.type === "video" ? (
                           <span className="absolute top-3 left-3">
@@ -201,7 +216,7 @@ export function MediaGallery() {
                           </span>
                         ) : null}
 
-                        <span className="absolute inset-x-0 bottom-0 translate-y-2 p-4 text-left text-[0.875rem] text-paper opacity-0 transition-[opacity,translate] duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span className="absolute inset-x-0 bottom-0 p-4 text-left text-[0.875rem] text-paper transition-[opacity,translate] duration-500 motion-safe:[@media(hover:hover)]:translate-y-2 motion-safe:[@media(hover:hover)]:opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
                           {item.caption}
                         </span>
                       </button>
@@ -214,16 +229,18 @@ export function MediaGallery() {
         </div>
       </LayoutGroup>
 
-      <MediaLightbox
-        item={openItem}
-        index={openIndex < 0 ? 0 : openIndex}
-        total={visible.length}
-        sharedLayout={openItem !== null && openItem.id === originId}
-        seed={openIndex}
-        onClose={close}
-        onPrev={() => step(-1)}
-        onNext={() => step(1)}
-      />
+      {everOpened ? (
+        <MediaLightbox
+          item={openItem}
+          index={openIndex < 0 ? 0 : openIndex}
+          total={visible.length}
+          sharedLayout={openItem !== null && openItem.id === originId}
+          seed={openIndex}
+          onClose={close}
+          onPrev={() => step(-1)}
+          onNext={() => step(1)}
+        />
+      ) : null}
     </>
   );
 }

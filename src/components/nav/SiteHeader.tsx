@@ -85,7 +85,7 @@ export function SiteHeader() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="inline-flex size-9 items-center justify-center rounded-full text-ink/65 transition-colors duration-200 hover:text-azure"
+                className="inline-flex size-9 items-center justify-center rounded-full text-ink/65 transition-colors duration-200 hover:text-azure-ink"
               >
                 <InstagramIcon className="size-[1.1rem]" />
               </a>

@@ -7,6 +7,7 @@ import { ActionLink } from "@/components/ui/ActionLink";
 import { InstagramIcon } from "@/components/ui/InstagramIcon";
 import { lockScroll, unlockScroll } from "@/components/motion/SmoothScroll";
 import { usePrefersReducedMotion } from "@/components/motion/use-media-preference";
+import { useFocusTrap } from "@/lib/use-focus-trap";
 import { bookingCta, navLinks, socialLinks, siteMeta } from "@/content";
 
 export function MobileMenu({
@@ -18,6 +19,10 @@ export function MobileMenu({
 }) {
   const reduced = usePrefersReducedMotion();
   const panelRef = useRef<HTMLDivElement>(null);
+
+  // Without this, Tab walks straight out of the overlay and into the page
+  // behind it, which is invisible but still focusable.
+  useFocusTrap(panelRef, open);
 
   useEffect(() => {
     if (!open) return;
@@ -89,7 +94,7 @@ export function MobileMenu({
                   <Link
                     href={link.href}
                     onClick={onClose}
-                    className="font-display block border-b border-ink/8 py-4 text-[2rem] leading-none text-ink transition-colors duration-200 hover:text-azure"
+                    className="font-display block border-b border-ink/8 py-4 text-[2rem] leading-none text-ink transition-colors duration-200 hover:text-azure-ink"
                   >
                     {link.label}
                   </Link>
@@ -127,7 +132,7 @@ export function MobileMenu({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="inline-flex size-10 items-center justify-center rounded-full border border-ink/12 text-ink/70 transition-colors duration-200 hover:border-azure/45 hover:text-azure"
+                    className="inline-flex size-10 items-center justify-center rounded-full border border-ink/12 text-ink/70 transition-colors duration-200 hover:border-azure/45 hover:text-azure-ink"
                   >
                     <InstagramIcon className="size-[1.15rem]" />
                   </a>

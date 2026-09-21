@@ -34,6 +34,14 @@ export type RevealWordsProps = {
   /** Replay every time it re-enters the viewport. */
   once?: boolean;
   /**
+   * Above-the-fold treatment: the entrance runs from CSS instead of Framer,
+   * so it paints as soon as the stylesheet lands rather than waiting on
+   * hydration — and still reads correctly with no JS at all. Use it for any
+   * heading that is visible on first paint; leave it off for anything that
+   * should wait to be scrolled to.
+   */
+  eager?: boolean;
+  /**
    * Scrub mode. Pass a 0–1 scroll progress value and the line assembles in
    * step with the scroll instead of firing once on view — the reader delivers
    * the line themselves. Ignored under `prefers-reduced-motion`.
@@ -142,6 +150,7 @@ export function RevealWords({
   distance = 22,
   blur = 10,
   once = true,
+  eager = false,
   progress,
   scrubRange = [0, 1],
   scrubOverlap = 1.7,
@@ -159,6 +168,29 @@ export function RevealWords({
   const delivered = { opacity: 1, y: 0, filter: "blur(0px)" };
 
   const Tag = as;
+
+  if (eager && !scrubbed) {
+    return (
+      <Tag id={id} className={className}>
+        {words.map((word, i) => (
+          <Fragment key={`${word}-${i}`}>
+            <span
+              className={cn("word-in inline-block", wordClassName)}
+              style={{
+                animationDelay: `${(delay + i * stagger).toFixed(3)}s`,
+                animationDuration: `${duration}s`,
+                ["--word-rise" as string]: `${distance}px`,
+                ["--word-blur" as string]: `${blur}px`,
+              }}
+            >
+              {word}
+            </span>
+            {i < words.length - 1 ? " " : null}
+          </Fragment>
+        ))}
+      </Tag>
+    );
+  }
 
   if (scrubbed && progress) {
     return (

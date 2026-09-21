@@ -37,13 +37,13 @@ export function SiteFooter() {
             <p className="font-display text-[1.5rem] leading-none text-ink">
               {siteMeta.name}
             </p>
-            <p className="mt-5 max-w-[42ch] text-[0.9375rem] leading-[1.6] text-ink/60">
+            <p className="mt-5 max-w-[42ch] text-[0.9375rem] leading-[1.6] text-ink/65">
               {footer.blurb}
             </p>
           </div>
 
           <nav aria-label="Footer">
-            <h2 className="text-[0.75rem] font-medium tracking-[0.18em] text-ink/45 uppercase">
+            <h2 className="text-[0.75rem] font-medium tracking-[0.18em] text-ink/65 uppercase">
               {footer.linksTitle}
             </h2>
             <ul className="mt-5 flex flex-col gap-3">
@@ -51,7 +51,7 @@ export function SiteFooter() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-[0.9375rem] text-ink/70 transition-colors duration-200 hover:text-azure"
+                    className="text-[0.9375rem] text-ink/70 transition-colors duration-200 hover:text-azure-ink"
                   >
                     {link.label}
                   </Link>
@@ -61,10 +61,10 @@ export function SiteFooter() {
           </nav>
 
           <div>
-            <h2 className="text-[0.75rem] font-medium tracking-[0.18em] text-ink/45 uppercase">
+            <h2 className="text-[0.75rem] font-medium tracking-[0.18em] text-ink/65 uppercase">
               {footer.contactTitle}
             </h2>
-            <p className="mt-5 max-w-[30ch] text-[0.9375rem] leading-[1.6] text-ink/60">
+            <p className="mt-5 max-w-[30ch] text-[0.9375rem] leading-[1.6] text-ink/65">
               {footer.contactNote}
             </p>
 
@@ -72,7 +72,7 @@ export function SiteFooter() {
               <a
                 href={`mailto:${footer.email.address}`}
                 data-placeholder={footer.email.placeholder || undefined}
-                className="mt-4 inline-block text-[0.9375rem] text-azure transition-colors duration-200 hover:text-ink"
+                className="mt-4 inline-block text-[0.9375rem] text-azure-ink transition-colors duration-200 hover:text-ink"
               >
                 {footer.email.address}
               </a>
@@ -86,7 +86,7 @@ export function SiteFooter() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="inline-flex size-10 items-center justify-center rounded-full border border-ink/12 text-ink/65 transition-colors duration-200 hover:border-azure/45 hover:text-azure"
+                  className="inline-flex size-10 items-center justify-center rounded-full border border-ink/12 text-ink/65 transition-colors duration-200 hover:border-azure/45 hover:text-azure-ink"
                 >
                   <InstagramIcon className="size-[1.15rem]" />
                 </a>
@@ -95,7 +95,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <p className="mt-14 border-t border-ink/8 pt-7 text-[0.8125rem] text-ink/45">
+        <p className="mt-14 border-t border-ink/8 pt-7 text-[0.8125rem] text-ink/65">
           {footer.copyright}
         </p>
       </div>

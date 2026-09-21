@@ -20,8 +20,10 @@ const base =
   "motion-safe:hover:-translate-y-0.5 active:translate-y-0";
 
 const variants: Record<ActionVariant, string> = {
+  // azure-ink, not azure: paper on plain azure is only 3.57:1 at button
+  // sizes. On azure-ink it is 5.64:1.
   primary:
-    "bg-azure text-paper shadow-[0_10px_30px_-12px_rgba(16,27,46,0.55)] " +
+    "bg-azure-ink text-paper shadow-[0_10px_30px_-12px_rgba(16,27,46,0.55)] " +
     "hover:bg-ink hover:shadow-[0_18px_40px_-14px_rgba(16,27,46,0.6)]",
   secondary:
     "border border-ink/12 bg-paper/70 text-ink backdrop-blur-sm " +
