@@ -1,10 +1,17 @@
-import { RevealBlock, RevealWords } from "@/components/motion";
+"use client";
+
+import { motion } from "motion/react";
+import { useState } from "react";
+import { RevealBlock, RevealWords, usePrefersReducedMotion } from "@/components/motion";
 import { Section, SectionEyebrow } from "@/components/layout/Section";
 import { FounderCard } from "@/components/ui/FounderCard";
 import { StaffCard } from "@/components/ui/StaffCard";
 import { founders, staff, team } from "@/content";
 
 export function TeamSection() {
+  const reduced = usePrefersReducedMotion();
+  const [openSlug, setOpenSlug] = useState<string | null>(null);
+
   return (
     <Section id={team.id} tone="mist" size="md" labelledBy="team-heading">
       <RevealBlock>
@@ -26,17 +33,31 @@ export function TeamSection() {
         </p>
       </RevealBlock>
 
+      {/*
+        Same disclosure as the roster on /about: each cell carries `layout`,
+        so opening one card glides the other to its new position rather than
+        snapping. That reflow is the layout animation, and it runs on
+        transforms.
+      */}
       <ul className="mx-auto mt-12 grid max-w-[58rem] gap-5 sm:mt-16 lg:grid-cols-2 lg:gap-7">
-        {founders.map((member, i) => (
-          <RevealBlock
+        {founders.map((member) => (
+          <motion.li
             key={member.slug}
-            as="li"
-            delay={i * 0.1}
-            distance={26}
+            layout={reduced ? false : true}
+            transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
             className="h-full"
           >
-            <FounderCard member={member} />
-          </RevealBlock>
+            <FounderCard
+              member={member}
+              expandable
+              expanded={openSlug === member.slug}
+              onToggle={() =>
+                setOpenSlug((current) =>
+                  current === member.slug ? null : member.slug,
+                )
+              }
+            />
+          </motion.li>
         ))}
       </ul>
 

@@ -184,40 +184,8 @@ export type FooterContent = {
   copyright: string;
 };
 
-/**
- * A picture or clip slot. `src` stays `null` until a real file exists. The
- * UI renders a palette gradient in the reserved box instead, so every layout
- * is testable before any asset lands.
- *
- * `aspect` is width ÷ height: 1 square, 0.8 = 4:5 portrait, 1.5 = 3:2
- * landscape, 0.5625 = 9:16. It reserves the box, so nothing shifts on load.
- */
-export type MediaAsset = {
-  src: string | null;
-  alt: string;
-  aspect: number;
-};
-
-export type StoryBlock = {
-  id: string;
-  heading: string;
-  body: string[];
-  image: MediaAsset;
-};
-
-export type PillarIcon = "podium" | "scales" | "waveform";
-
-export type Pillar = {
-  id: string;
-  icon: PillarIcon;
-  title: string;
-  body: string;
-};
-
 export type AboutContent = {
-  hero: { eyebrow: string; headline: string; subhead: string };
-  story: { eyebrow: string; title: string; blocks: StoryBlock[] };
-  mission: { eyebrow: string; title: string; pillars: Pillar[] };
+  metaDescription: string;
   roster: { eyebrow: string; title: string; intro: string };
 };
 

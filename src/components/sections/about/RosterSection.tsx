@@ -13,18 +13,23 @@ export function RosterSection() {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
 
   return (
-    <Section tone="mist" size="md" labelledBy="roster-heading">
+    <Section
+      tone="mist"
+      size="flush"
+      labelledBy="roster-heading"
+      className="pt-[calc(var(--header-h)+4.5rem)] pb-24 sm:pt-[calc(var(--header-h)+6rem)] sm:pb-28 lg:pb-36"
+    >
       <RevealBlock>
         <SectionEyebrow>{about.roster.eyebrow}</SectionEyebrow>
       </RevealBlock>
 
       <RevealBlock delay={0.08}>
-        <h2
+        <h1
           id="roster-heading"
           className="font-display mt-6 text-[length:var(--text-section)] text-ink"
         >
           {about.roster.title}
-        </h2>
+        </h1>
       </RevealBlock>
 
       <RevealBlock delay={0.16}>

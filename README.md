@@ -41,7 +41,7 @@ should not need to open a component to change copy.
 | `team.ts` | The team: founders and staff, with roles, bios, highlights, headshots |
 | `closing.ts` | The dark closing band: headline, subhead, both buttons |
 | `footer.ts` | Footer blurb, footer links, contact email, copyright |
-| `about.ts` | Everything on `/about`: hero, story blocks, mission pillars |
+| `about.ts` | The `/about` page heading and intro (the page is just the roster) |
 | `media.ts` | Everything on `/media`: gallery items and filter labels |
 | `types.ts` | The shape of all of the above. Worth a look before adding fields. |
 
@@ -55,7 +55,7 @@ document.querySelectorAll('[data-placeholder]')
 ```
 
 Currently placeholder: two of the three stat numbers, the summer price,
-every gallery item, and the `/about` story prose.
+and every gallery item.
 
 ---
 
