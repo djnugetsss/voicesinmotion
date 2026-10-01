@@ -24,8 +24,9 @@ export const workshops: WorkshopsContent = {
       id: "community-workshop",
       marker: "01",
       name: "Community Workshop",
-      dates: "October 24–25, 2026",
-      signupUrl: null,
+      dates: "October 25, 2026",
+      signupUrl:
+        "https://docs.google.com/forms/d/e/1FAIpQLScGLUW2NqAFpWCjGbJYjAsccRCt5ZSx3As_BadsVqjt9DgGnQ/viewform?usp=header",
     },
     {
       id: "winter-workshop",
