@@ -11,3 +11,4 @@ export * from "./closing";
 export * from "./footer";
 export * from "./about";
 export * from "./media";
+export * from "./photos";

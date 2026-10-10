@@ -6,8 +6,9 @@ import { ScrollCue } from "./ScrollCue";
 import { Parallax, RevealBlock, RevealWords, Spotlight } from "@/components/motion";
 import { Section } from "@/components/layout/Section";
 import { ActionLink } from "@/components/ui/ActionLink";
+import { PhotoCard } from "@/components/ui/PhotoCard";
 import { Waveform } from "@/components/ui/Waveform";
-import { hero } from "@/content";
+import { hero, photos } from "@/content";
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -112,6 +113,45 @@ export function Hero() {
               >
                 {hero.secondaryCta.label}
               </ActionLink>
+            </div>
+          </RevealBlock>
+        </div>
+      </div>
+
+      {/* ---- Photos ----
+          Only where there is a column of empty space beside the headline. */}
+      <div className="pointer-events-none absolute inset-0 hidden xl:block">
+        <div className="shell relative h-full">
+          <RevealBlock
+            eager
+            delay={0.5}
+            distance={24}
+            className="absolute top-1/2 right-10 -translate-y-[42%]"
+          >
+            {/* The selfie matches the height of the two stacked frames, so
+                the three sit as one tidy block with no overlap. */}
+            <div className="flex items-center gap-3">
+              <div className="flex flex-col gap-3">
+                <PhotoCard
+                  photo={photos.zoomPrograms}
+                  compact
+                  sizes="(min-width: 1536px) 15.5rem, 13.5rem"
+                  className="w-[13.5rem] 2xl:w-[15.5rem]"
+                />
+                <PhotoCard
+                  photo={photos.zoomReviews}
+                  compact
+                  sizes="(min-width: 1536px) 15.5rem, 13.5rem"
+                  className="w-[13.5rem] 2xl:w-[15.5rem]"
+                />
+              </div>
+              <PhotoCard
+                photo={photos.trophy}
+                compact
+                priority
+                sizes="(min-width: 1536px) 13.8rem, 12rem"
+                className="w-[12rem] 2xl:w-[13.8rem]"
+              />
             </div>
           </RevealBlock>
         </div>
